@@ -9,7 +9,9 @@ import {
   Calendar,
   ExternalLink,
   Heart,
-  Sparkles
+  Sparkles,
+  Gift,
+  ShoppingBag
 } from 'lucide-react';
 import { InvitationConfig } from '../types/invitation';
 import { audioPlayer } from '../utils/audioPlayer';
@@ -141,20 +143,30 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           <HotAirBalloonBear className="w-52 h-64 drop-shadow-sm" />
         </motion.div>
 
-        {/* Script Title in Spanish */}
+        {/* Emotive Welcome Phrase & Scripture from PDF */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-1"
+          className="mt-2 max-w-sm mx-auto px-3"
         >
-          <h1 className="font-script text-5xl sm:text-6xl text-[#555A4F] leading-tight">
-            {config.mainBearTitle}
+          <h1 className="font-script text-4xl sm:text-5xl text-[#555A4F] leading-tight">
+            Una nueva historia
           </h1>
-          <p className="font-serif-clean italic text-sm text-[#8A9A83] max-w-xs mx-auto mt-2 leading-relaxed">
-            &ldquo;{config.subtitle}&rdquo;
+          <p className="font-serif-clean text-base sm:text-lg text-[#555A4F] font-medium mt-1 leading-snug">
+            está por comenzar, y nos hace felices saber que hay personas como tú con quienes compartirla.
           </p>
+
+          {/* Cita bíblica según el PDF: “Todo lo hizo hermoso en su tiempo.” Eclesiastés 3:11 */}
+          <div className="mt-4 pt-3 border-t border-[#8A9A83]/25 max-w-xs mx-auto">
+            <p className="font-serif-clean italic text-sm text-[#8A9A83] font-medium leading-relaxed">
+              &ldquo;Todo lo hizo hermoso en su tiempo.&rdquo;
+            </p>
+            <span className="text-[11px] font-sans-clean uppercase tracking-[0.2em] text-[#C6A67A] font-bold block mt-0.5">
+              Eclesiastés 3:11
+            </span>
+          </div>
         </motion.div>
       </section>
 
@@ -457,8 +469,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
 
       {/* =========================================================================
           SECCIÓN 6 - CONFIRMACIÓN (RSVP)
-          Icono de WhatsApp, título Script "Confirmación",
-          texto y botón "Confirma Aquí"
+          Texto exacto del PDF: "Confirma tu asistencia por WhatsApp a este número..."
       ========================================================================== */}
       <section className="py-8 px-6 text-center">
         <motion.div
@@ -477,8 +488,13 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           </h3>
 
           <p className="text-xs text-[#555A4F] font-sans-clean leading-relaxed my-3">
-            Nos llenará de alegría contar con tu presencia en este momento tan especial. Por favor confírmanos tu asistencia al <strong>{config.hostPhone.replace(/^57/, '')}</strong>.
+            {config.rsvpInstruction || 'Confirma tu asistencia por WhatsApp a este número, indicando tu nombre completo y si asistirás o no. Así podremos llevar nuestro registro. ¡Te esperamos con mucho amor!'}
           </p>
+
+          <div className="mb-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F5F1E7] border border-[#8A9A83]/30 text-xs font-sans-clean font-bold text-[#555A4F]">
+            <span>WhatsApp:</span>
+            <span className="text-[#6E8168]">{config.hostPhone.replace(/^57/, '')}</span>
+          </div>
 
           <button
             onClick={handleWhatsAppRsvp}
@@ -491,11 +507,9 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
       </section>
 
       {/* =========================================================================
-          SECCIÓN 7 - LISTA DE REGALOS & CIERRE
-          Icono de sobre de dinero, título Script "Lista de Regalos",
-          Lluvia de sobres + opciones de regalo sugeridas,
-          Ilustración final del osito durmiente en SVG,
-          Título Script "Te Esperamos" y "Con mucho amor".
+          SECCIÓN 7 - LISTA DE REGALOS (PEPE GANGA) & CIERRE
+          Texto exacto del PDF: "Te compartimos nuestra lista de regalos para nuestro bebé..."
+          Con enlace interactivo anclado y compra en punto físico de Pepe Ganga.
       ========================================================================== */}
       <section className="py-8 px-6 text-center">
         <motion.div
@@ -506,45 +520,42 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           className="max-w-xs mx-auto p-6 rounded-3xl bg-white border border-[#C6A67A]/40 shadow-md mb-8"
         >
           <div className="w-12 h-12 rounded-full bg-[#FAF4ED] text-[#C6A67A] mx-auto flex items-center justify-center shadow-xs mb-2">
-            <Mail className="w-6 h-6" />
+            <Gift className="w-6 h-6" />
           </div>
 
           <h3 className="font-script text-4xl text-[#555A4F] mb-1">
             Lista de Regalos
           </h3>
 
+          {/* Mensaje exacto del PDF */}
           <p className="text-xs text-[#555A4F] font-sans-clean leading-relaxed mt-2 mb-4">
             {config.giftNote}
           </p>
 
-          {/* Lluvia de Sobres Card */}
-          <div className="p-4 rounded-2xl bg-[#FAF4ED] border border-[#C6A67A]/50 text-left mb-4 shadow-2xs">
-            <div className="flex items-center gap-2 font-sans-clean font-bold text-xs text-[#8c6738]">
-              <Mail className="w-4 h-4 text-[#C6A67A]" />
-              <span>Lluvia de Sobres</span>
-            </div>
-            <p className="text-[11px] text-[#555A4F] mt-1.5 leading-relaxed font-sans-clean">
-              Dispondremos de un cofre especial en el salón para quienes deseen hacernos su regalo en sobre para el ajuar de Benjamín.
-            </p>
+          {/* Enlace anclado directo a la lista de regalos en Pepe Ganga */}
+          <div className="mt-3 mb-4">
+            <a
+              href={config.giftListUrl || 'https://www.pepeganga.com/bebes'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl bg-[#8A9A83] hover:bg-[#788871] text-white font-sans-clean font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer group"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              <span>Ver Lista en Pepe Ganga</span>
+              <ExternalLink className="w-3.5 h-3.5 opacity-80 group-hover:translate-x-0.5 transition-transform" />
+            </a>
           </div>
 
-          {/* Lista de sugerencias */}
-          {config.giftItems && config.giftItems.length > 0 && (
-            <div className="space-y-1.5 text-left">
-              <span className="text-[10px] font-sans-clean uppercase tracking-wider font-bold text-[#8A9A83] block mb-1">
-                Sugerencias para el bebé:
-              </span>
-              {config.giftItems.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="px-3 py-2 rounded-xl bg-[#F9F6F0] border border-[#8A9A83]/20 text-[11px] text-[#4A4A4A] flex items-center gap-2"
-                >
-                  <Sparkles className="w-3 h-3 text-[#C6A67A] shrink-0" />
-                  <span>{item}</span>
-                </div>
-              ))}
+          {/* Tarjeta explicativa sobre punto físico de Pepe Ganga */}
+          <div className="p-3.5 rounded-2xl bg-[#FAF4ED] border border-[#C6A67A]/50 text-left shadow-2xs">
+            <div className="flex items-center gap-2 font-sans-clean font-bold text-xs text-[#8c6738]">
+              <Sparkles className="w-3.5 h-3.5 text-[#C6A67A]" />
+              <span>Compra en Punto Físico</span>
             </div>
-          )}
+            <p className="text-[11px] text-[#555A4F] mt-1.5 leading-relaxed font-sans-clean">
+              Solo debes escoger uno de los regalitos en el enlace y comprarlo en tu punto físico de <strong>Pepe Ganga</strong> más cercano.
+            </p>
+          </div>
         </motion.div>
 
         {/* Final Bespoke Sitting Teddy Bear SVG & Romantic Closure */}

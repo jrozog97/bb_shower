@@ -4,8 +4,8 @@ export const defaultInvitationConfig: InvitationConfig = {
   babyName: 'Benjamín',
   parentsNames: 'Alejandra y Andrés',
   welcomeCurvedText: '¡Un hermoso bebé está a punto de llegar!',
-  mainBearTitle: 'Apenas podemos esperar tu llegada',
-  subtitle: 'Mientras Diosito prepara el día de mi llegada con mucho amor...',
+  mainBearTitle: 'Una nueva historia está por comenzar, y nos hace felices saber que hay personas como tú con quienes compartirla.',
+  subtitle: '“Todo lo hizo hermoso en su tiempo.” Eclesiastés 3:11',
   
   dayNumber: '29',
   dayName: 'Domingo',
@@ -20,15 +20,11 @@ export const defaultInvitationConfig: InvitationConfig = {
   googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Calle+151b+%23+103f-41+Suba+Bogota',
 
   hostPhone: '573163366206',
-  rsvpMessage: '¡Hola Alejandra y Andrés! Me encantaría confirmar mi asistencia al Baby Shower de Benjamín 🧸✨',
+  rsvpInstruction: 'Confirma tu asistencia por WhatsApp a este número, indicando tu nombre completo y si asistirás o no. Así podremos llevar nuestro registro. ¡Te esperamos con mucho amor!',
+  rsvpMessage: '¡Hola Alejandra y Andrés! Confirmo mi asistencia al Baby Shower de Benjamín 🧸✨\n\nNombre completo: \n¿Asistiré?: ',
 
-  giftNote: 'Tu presencia es nuestro regalo más valioso. Si deseas tener un detalle para consentir a Benjamín, te agradecemos mucho tu cariño:',
-  giftItems: [
-    '✉️ Lluvia de Sobres (Aporte para el ajuar de Benjamín en el cofre del salón)',
-    '🍼 Pañales etapas 1, 2 y 3',
-    '🌿 Toallitas húmedas para recién nacido',
-    '🧸 Ropita suave de 0 a 6 meses',
-  ],
+  giftNote: 'Te compartimos nuestra lista de regalos para nuestro bebé. En el enlace encontrarás los regalitos que elegimos con mucho amor; solo debes escoger uno y comprarlo en un punto físico de Pepe Ganga.',
+  giftListUrl: 'https://www.pepeganga.com/bebes',
   closureTitle: 'Te Esperamos',
   closureText: 'Con mucho amor',
 

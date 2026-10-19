@@ -25,9 +25,11 @@ export interface InvitationConfig {
 
   // Gifts
   giftNote: string;
+  giftListUrl?: string;
   giftItems?: string[];
   closureTitle: string;
   closureText: string;
+  rsvpInstruction?: string;
 
   // Custom audio
   musicUrl?: string;
