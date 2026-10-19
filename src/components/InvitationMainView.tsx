@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { 
-  Play, 
-  Pause, 
+  Volume2, 
+  VolumeX, 
   MapPin, 
   MessageCircle, 
   Mail, 
   Calendar,
   ExternalLink,
-  Heart
+  Heart,
+  Sparkles
 } from 'lucide-react';
 import { InvitationConfig } from '../types/invitation';
 import { audioPlayer } from '../utils/audioPlayer';
+import { HotAirBalloonBear, BuntingGarland, TeddyBearFinal } from './BohoIcons';
+import { StoryUltrasoundItinerary } from './StoryUltrasoundItinerary';
 
 interface InvitationMainViewProps {
   config: InvitationConfig;
-  onEditRequested?: () => void;
 }
 
-export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, onEditRequested }) => {
+export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }) => {
   const [isPlaying, setIsPlaying] = useState(audioPlayer.isPlayingState);
 
   useEffect(() => {
@@ -30,7 +32,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
     audioPlayer.toggle(config.musicUrl);
   };
 
-  // Live countdown to target date
+  // Live countdown to target date (29 de Noviembre de 2026 a las 2:00 PM)
   const [timeLeft, setTimeLeft] = useState<{
     days: number;
     hours: number;
@@ -70,90 +72,87 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
   }, [config.fullDateTarget]);
 
   const handleWhatsAppRsvp = () => {
-    const cleanPhone = config.hostPhone.replace(/\D/g, '');
+    let cleanPhone = config.hostPhone.replace(/\D/g, '');
+    if (cleanPhone.length === 10 && cleanPhone.startsWith('3')) {
+      cleanPhone = `57${cleanPhone}`;
+    }
     const encoded = encodeURIComponent(config.rsvpMessage);
     window.open(`https://wa.me/${cleanPhone}?text=${encoded}`, '_blank');
   };
 
+  // Google Calendar URL generator
+  const googleCalendarUrl = () => {
+    const title = encodeURIComponent(`Baby Shower de ${config.babyName} 🧸`);
+    const details = encodeURIComponent(
+      `¡Acompáñanos a celebrar el Baby Shower de ${config.babyName}!\n\n` +
+      `Padres: ${config.parentsNames}\n` +
+      `Lugar: ${config.venueName} (${config.venueAddress})\n` +
+      `Horario: ${config.timeString}\n` +
+      `¡Te esperamos con mucho amor!`
+    );
+    const location = encodeURIComponent(`${config.venueName}, ${config.venueAddress}, Bogotá, Colombia`);
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261129T190000Z/20261130T000000Z&details=${details}&location=${location}&sf=true&output=xml`;
+  };
+
   return (
-    <div className="relative w-full max-w-md mx-auto boho-bg text-[#4A4A4A] min-h-screen overflow-x-hidden pb-16">
-      {/* Floating Music Button (Top Left as specified) */}
+    <div className="relative w-full max-w-md mx-auto boho-bg text-[#4A4A4A] min-h-screen overflow-x-hidden pb-12 select-none">
+      {/* Floating Music Button (Top Left) */}
       <div className="fixed top-4 left-4 z-40">
         <button
           onClick={toggleMusic}
-          className="w-10 h-10 rounded-full bg-white/95 border border-[#8A9A83]/40 shadow-lg flex items-center justify-center text-[#8A9A83] hover:text-[#555A4F] transition-all hover:scale-105 active:scale-95 cursor-pointer"
+          className="w-11 h-11 rounded-full bg-white/95 border border-[#8A9A83]/40 shadow-lg flex items-center justify-center text-[#8A9A83] hover:text-[#555A4F] hover:bg-white transition-all hover:scale-105 active:scale-95 cursor-pointer group"
           title={isPlaying ? 'Pausar música' : 'Reproducir música'}
         >
           {isPlaying ? (
-            <Pause className="w-4 h-4 fill-[#8A9A83]" />
+            <Volume2 className="w-5 h-5 text-[#8A9A83] animate-pulse" />
           ) : (
-            <Play className="w-4 h-4 fill-[#8A9A83] ml-0.5" />
+            <VolumeX className="w-5 h-5 text-stone-400" />
           )}
         </button>
       </div>
 
       {/* =========================================================================
           SECCIÓN 1 - BIENVENIDA
-          Curved text, balloon with teddy bear, Script title: "we can Bearly wait"
+          Texto curvo en español, ilustración artesanal del globo con osito,
+          Título Script y dedicatoria emotiva.
       ========================================================================== */}
-      <section className="pt-16 pb-10 px-6 text-center flex flex-col items-center relative overflow-hidden">
-        {/* Soft floating clouds */}
-        <div className="absolute top-8 left-4 text-3xl opacity-35 animate-gentle-float">☁️</div>
-        <div className="absolute top-12 right-6 text-3xl opacity-30 animate-gentle-float" style={{ animationDelay: '1.2s' }}>☁️</div>
-
-        {/* Curved Header Phrase */}
+      <section className="pt-16 pb-8 px-6 text-center flex flex-col items-center relative overflow-hidden">
+        {/* Curving Welcome Phrase */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-4"
+          className="mb-2"
         >
-          <p className="font-handwriting text-xl sm:text-2xl text-[#8A9A83] font-semibold tracking-wide">
+          <span className="inline-block px-4 py-1 rounded-full bg-[#EBF3EC] border border-[#8A9A83]/30 text-xs font-handwriting text-[#6E8168] font-bold tracking-wide">
             {config.welcomeCurvedText}
-          </p>
+          </span>
         </motion.div>
 
-        {/* Principal Graphic: Hot Air Balloon with Teddy Bear */}
+        {/* Bespoke Hot Air Balloon with Teddy Bear (High Quality SVG) */}
         <motion.div
-          initial={{ scale: 0.85, opacity: 0 }}
+          initial={{ scale: 0.88, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="relative my-2 w-48 h-48 flex items-center justify-center animate-gentle-float"
+          transition={{ duration: 0.85, ease: 'easeOut' }}
+          className="relative my-2 flex items-center justify-center animate-gentle-float"
         >
-          {/* Watercolor Boho Hot Air Balloon Illustration Container */}
-          <div className="relative w-full h-full flex flex-col items-center justify-center">
-            {/* Balloon canopy with pastel sage and cream stripes */}
-            <div className="w-32 h-36 rounded-full bg-gradient-to-b from-[#8A9A83] via-[#9EB299] to-[#C6A67A] shadow-md relative flex items-center justify-center overflow-hidden border-2 border-white/80">
-              <div className="absolute inset-0 opacity-25 bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-[size:10px_10px]" />
-              <div className="w-16 h-full bg-white/30 rounded-full" />
-              <span className="text-4xl filter drop-shadow">⭐</span>
-            </div>
-            {/* Ropes */}
-            <div className="w-14 h-4 flex justify-between px-2 -mt-1">
-              <div className="w-[1px] h-full bg-[#C6A67A]" />
-              <div className="w-[1px] h-full bg-[#C6A67A]" />
-            </div>
-            {/* Basket with cute teddy bear */}
-            <div className="w-16 h-12 rounded-b-xl bg-[#C6A67A] border-t-2 border-[#A8885B] shadow-sm flex items-center justify-center relative -mt-0.5">
-              <span className="text-3xl -mt-5">🧸</span>
-            </div>
-          </div>
+          <HotAirBalloonBear className="w-52 h-64 drop-shadow-sm" />
         </motion.div>
 
-        {/* Script Title: "we can Bearly wait" */}
+        {/* Script Title in Spanish */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-2"
+          className="mt-1"
         >
-          <h1 className="font-script text-5xl sm:text-6xl text-[#555A4F] drop-shadow-xs">
+          <h1 className="font-script text-5xl sm:text-6xl text-[#555A4F] leading-tight">
             {config.mainBearTitle}
           </h1>
-          <p className="font-serif-clean italic text-sm sm:text-base text-[#8A9A83] max-w-xs mx-auto mt-2 leading-relaxed">
+          <p className="font-serif-clean italic text-sm text-[#8A9A83] max-w-xs mx-auto mt-2 leading-relaxed">
             &ldquo;{config.subtitle}&rdquo;
           </p>
         </motion.div>
@@ -161,27 +160,27 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
 
       {/* =========================================================================
           SECCIÓN 2 - LOS PADRES
-          "Mis papis: MARTHA Y DAVID" + 2 Polaroids superimposed & rotated
+          "Mis papis: ALEJANDRA Y ANDRÉS" + 2 Polaroids asimétricas
       ========================================================================== */}
-      <section className="py-10 px-6 text-center">
+      <section className="py-8 px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-[11px] font-sans-clean uppercase tracking-[0.25em] text-[#8A9A83] font-bold block mb-1">
+          <span className="text-[10px] font-sans-clean uppercase tracking-[0.25em] text-[#8A9A83] font-bold block mb-1">
             Nuestra Familia
           </span>
           <h2 className="font-sans-clean font-bold text-xl sm:text-2xl text-[#4A4A4A] uppercase tracking-wider mb-2">
             Mis papis: <span className="text-[#8A9A83] font-script normal-case text-3xl sm:text-4xl font-normal block sm:inline">{config.parentsNames}</span>
           </h2>
-          <p className="text-xs text-[#555A4F] font-sans-clean max-w-xs mx-auto mb-8 leading-relaxed">
-            Esperando con todo el amor del mundo la bendición de tenerte entre nuestros brazos.
+          <p className="text-xs text-[#555A4F] font-sans-clean max-w-xs mx-auto mb-7 leading-relaxed">
+            Esperando con todo el corazón la bendición de tenerte muy pronto entre nuestros brazos.
           </p>
         </motion.div>
 
-        {/* 2 Polaroids Superimposed & Slightly Rotated (-3deg & 5deg) */}
+        {/* 2 Polaroids Superimposed and Asymmetrically Rotated */}
         <div className="relative w-full max-w-xs mx-auto h-64 flex items-center justify-center">
           {/* Polaroid 1 (Left, rotated -4deg) */}
           <motion.div
@@ -194,12 +193,12 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
             <div className="aspect-square w-full overflow-hidden bg-stone-100 rounded-2xs">
               <img
                 src={config.parentPhoto1Url}
-                alt="Martha y David"
+                alt="Alejandra y Andrés"
                 className="w-full h-full object-cover"
               />
             </div>
-            <p className="font-handwriting text-xs text-stone-600 text-center mt-2">
-              Juntos en la espera 💕
+            <p className="font-handwriting text-xs text-stone-600 text-center mt-2 font-semibold">
+              Juntos en la dulce espera 💕
             </p>
           </motion.div>
 
@@ -218,7 +217,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
                 className="w-full h-full object-cover"
               />
             </div>
-            <p className="font-handwriting text-xs text-stone-600 text-center mt-2">
+            <p className="font-handwriting text-xs text-stone-600 text-center mt-2 font-semibold">
               Contando los días ✨
             </p>
           </motion.div>
@@ -227,26 +226,18 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
 
       {/* =========================================================================
           SECCIÓN 3 - EL BEBÉ
-          Bunting graphic, "MI BABY SHOWER", Giant Script "Santiago David" + Ecografía Polaroid
+          Guirnalda de banderines en SVG, "MI BABY SHOWER",
+          Nombre gigante en Script: "Benjamín" + Foto Polaroid Ecografía
       ========================================================================== */}
-      <section className="py-10 px-6 text-center">
-        {/* Bunting Banner Graphic (Banderines) */}
+      <section className="py-8 px-6 text-center">
+        {/* SVG Bunting Garland */}
         <motion.div
-          initial={{ opacity: 0, scaleX: 0.7 }}
+          initial={{ opacity: 0, scaleX: 0.8 }}
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
-          className="flex justify-center items-center gap-1.5 mb-3"
+          className="max-w-xs mx-auto mb-3"
         >
-          {['#9EB299', '#C6A67A', '#8A9A83', '#D4B895', '#9EB299', '#C6A67A'].map((color, i) => (
-            <div
-              key={i}
-              className="w-5 h-6 shadow-2xs"
-              style={{
-                backgroundColor: color,
-                clipPath: 'polygon(0 0, 100% 0, 50% 100%)',
-              }}
-            />
-          ))}
+          <BuntingGarland className="w-full h-8" />
         </motion.div>
 
         <motion.div
@@ -255,10 +246,10 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-[11px] font-sans-clean uppercase tracking-[0.3em] text-[#8A9A83] font-bold">
+          <span className="text-[10px] font-sans-clean uppercase tracking-[0.3em] text-[#8A9A83] font-bold">
             MI BABY SHOWER
           </span>
-          <h2 className="font-script text-5xl sm:text-6xl text-[#555A4F] my-2 drop-shadow-xs">
+          <h2 className="font-script text-6xl sm:text-7xl text-[#555A4F] my-1 drop-shadow-xs">
             {config.babyName}
           </h2>
         </motion.div>
@@ -274,42 +265,49 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
           <div className="aspect-square w-full overflow-hidden bg-stone-100 rounded-2xs relative">
             <img
               src={config.ultrasoundPhotoUrl}
-              alt="Ecografía de Santiago David"
+              alt="Ecografía de Benjamín"
               className="w-full h-full object-cover"
             />
-            <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded-full bg-white/80 text-[9px] font-sans-clean font-semibold text-stone-600">
+            <div className="absolute top-1.5 right-1.5 px-2 py-0.5 rounded-full bg-white/90 text-[9px] font-sans-clean font-bold text-stone-600 shadow-2xs">
               Ecografía
             </div>
           </div>
-          <p className="font-handwriting text-sm text-[#8A9A83] font-semibold text-center mt-2.5">
-            ¡Hola mundo! Soy yo 👶✨
+          <p className="font-handwriting text-sm text-[#8A9A83] font-bold text-center mt-2.5">
+            ¡Hola a todos! Soy Benjamín 👶✨
           </p>
         </motion.div>
       </section>
 
       {/* =========================================================================
-          SECCIÓN 4 - FECHA Y CONTADOR
-          3 horizontal cards: [DÍA 20 Sábado] [MES 06 Junio] [AÑO 26]
-          "¿CUÁNTO FALTA?" + Live Countdown on Sage Green Background with White Letters
+          SECCIÓN ITINERARIO EN CUENTO ECOGRÁFICO (INNOVACIÓN 1000/10)
+          Carrousel interactivo con estética de ecografía 4D del bebé Benjamín
+          y narrativa de cuento infantil en primera persona.
       ========================================================================== */}
-      <section className="py-10 px-6 text-center">
-        {/* 3 Date Cards */}
+      <StoryUltrasoundItinerary />
+
+      {/* =========================================================================
+          SECCIÓN 4 - FECHA Y CONTADOR
+          3 tarjetas horizontales: [DÍA 29 Domingo] [MES 11 Noviembre] [AÑO 26]
+          "¿CUÁNTO FALTA?" + Contador en vivo en verde salvia
+      ========================================================================== */}
+      <section className="py-8 px-6 text-center">
+        {/* 3 Horizontal Date Cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-3 gap-3 max-w-xs mx-auto mb-8"
+          className="grid grid-cols-3 gap-2.5 max-w-xs mx-auto mb-6"
         >
           {/* Card Día */}
           <div className="p-3 rounded-2xl bg-white border border-[#C6A67A]/40 shadow-sm flex flex-col items-center">
             <span className="text-[9px] font-sans-clean uppercase tracking-wider text-[#8A9A83] font-bold">
               DÍA
             </span>
-            <span className="font-serif-clean text-2xl font-bold text-[#4A4A4A] my-0.5">
+            <span className="font-serif-clean text-2xl sm:text-3xl font-bold text-[#4A4A4A] my-0.5">
               {config.dayNumber}
             </span>
-            <span className="text-[10px] font-sans-clean text-stone-500 font-medium">
+            <span className="text-[10px] font-sans-clean text-stone-500 font-medium capitalize">
               {config.dayName}
             </span>
           </div>
@@ -319,10 +317,10 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
             <span className="text-[9px] font-sans-clean uppercase tracking-wider text-[#8A9A83] font-bold">
               MES
             </span>
-            <span className="font-serif-clean text-2xl font-bold text-[#4A4A4A] my-0.5">
+            <span className="font-serif-clean text-2xl sm:text-3xl font-bold text-[#4A4A4A] my-0.5">
               {config.monthNumber}
             </span>
-            <span className="text-[10px] font-sans-clean text-stone-500 font-medium">
+            <span className="text-[10px] font-sans-clean text-stone-500 font-medium capitalize">
               {config.monthName}
             </span>
           </div>
@@ -332,7 +330,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
             <span className="text-[9px] font-sans-clean uppercase tracking-wider text-[#8A9A83] font-bold">
               AÑO
             </span>
-            <span className="font-serif-clean text-2xl font-bold text-[#4A4A4A] my-0.5">
+            <span className="font-serif-clean text-2xl sm:text-3xl font-bold text-[#4A4A4A] my-0.5">
               {config.yearShort}
             </span>
             <span className="text-[10px] font-sans-clean text-stone-500 font-medium">
@@ -349,9 +347,8 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
           transition={{ duration: 0.6 }}
           className="rounded-3xl bg-[#8A9A83] text-white p-6 shadow-xl max-w-sm mx-auto relative overflow-hidden"
         >
-          {/* Subtle floral pattern overlay */}
-          <div className="absolute top-2 right-2 text-2xl opacity-20 pointer-events-none">🌿</div>
-          <div className="absolute bottom-2 left-2 text-2xl opacity-20 pointer-events-none">🌿</div>
+          <div className="absolute top-2 right-3 text-xl opacity-20 pointer-events-none">🌿</div>
+          <div className="absolute bottom-2 left-3 text-xl opacity-20 pointer-events-none">🌿</div>
 
           <h3 className="text-xs font-sans-clean uppercase tracking-[0.25em] font-bold text-[#F9F6F0] mb-4">
             ¿CUÁNTO FALTA?
@@ -375,7 +372,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
                     <span className="font-serif-clean text-2xl sm:text-3xl font-bold text-white tabular-nums tracking-tight">
                       {String(item.val).padStart(2, '0')}
                     </span>
-                    <span className="text-[9px] font-sans-clean uppercase tracking-wider text-[#F9F6F0]/80 mt-0.5">
+                    <span className="text-[9px] font-sans-clean uppercase tracking-wider text-[#F9F6F0]/85 mt-0.5">
                       {item.label}
                     </span>
                   </div>
@@ -387,15 +384,28 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
             </div>
           )}
         </motion.div>
+
+        {/* Direct Google Calendar 1-Tap Button */}
+        <div className="mt-4">
+          <a
+            href={googleCalendarUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-xs font-sans-clean font-semibold text-[#6E8168] hover:text-[#555A4F] bg-white/80 border border-[#8A9A83]/30 px-4 py-2 rounded-full shadow-2xs hover:bg-white transition-all cursor-pointer"
+          >
+            <Calendar className="w-3.5 h-3.5 text-[#8A9A83]" />
+            <span>Agregar a mi Calendario de Google</span>
+          </a>
+        </div>
       </section>
 
       {/* =========================================================================
           SECCIÓN 5 - UBICACIÓN
-          Arch container background in warm sand color, location pin,
-          Script title: "Lugar", "Salón Fantasy", "Calle 90", "4:00 PM",
-          Rectangular sage green button: "Ver Ubicación" -> Google Maps
+          Contenedor con forma de arco / bóveda en color arena,
+          "Lugar", "Salón San Juan Suba", "Calle 151b # 103f-41", "2:00 PM a 7:00 PM"
+          Botón rectangular verde salvia: "Ver Ubicación en Google Maps"
       ========================================================================== */}
-      <section className="py-10 px-6 text-center">
+      <section className="py-8 px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -404,7 +414,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
           className="max-w-xs mx-auto p-8 rounded-t-[100px] rounded-b-3xl bg-[#D4B895]/35 border border-[#C6A67A]/50 shadow-md relative overflow-hidden"
         >
           {/* Location Pin Icon */}
-          <div className="w-12 h-12 rounded-full bg-white text-[#8A9A83] mx-auto flex items-center justify-center shadow-sm mb-2">
+          <div className="w-12 h-12 rounded-full bg-white text-[#8A9A83] mx-auto flex items-center justify-center shadow-xs mb-2">
             <MapPin className="w-6 h-6" />
           </div>
 
@@ -413,7 +423,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
             Lugar
           </h3>
 
-          {/* Texts: Salón Fantasy, Calle 90, 4:00 PM */}
+          {/* Venue texts */}
           <div className="space-y-1 my-3">
             <p className="font-sans-clean font-bold text-base text-[#4A4A4A]">
               {config.venueName}
@@ -421,22 +431,25 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
             <p className="text-xs text-[#555A4F] font-sans-clean">
               {config.venueAddress}
             </p>
-            <p className="text-xs font-semibold text-[#8A9A83] font-sans-clean pt-1">
+            <p className="text-xs text-stone-500 font-sans-clean">
+              Suba, Bogotá
+            </p>
+            <p className="text-xs font-semibold text-[#8A9A83] font-sans-clean pt-1.5">
               Hora: {config.timeString}
             </p>
           </div>
 
-          {/* Rectangular Interactive Sage Green Button: "Ver Ubicación" */}
+          {/* Rectangular Interactive Sage Green Button */}
           <div className="mt-5">
             <a
               href={config.googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full py-3 px-6 rounded-xl bg-[#8A9A83] hover:bg-[#788871] text-white font-sans-clean font-semibold text-xs uppercase tracking-wider shadow-md transition-all active:scale-95 cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-xl bg-[#8A9A83] hover:bg-[#788871] text-white font-sans-clean font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
             >
-              <MapPin className="w-3.5 h-3.5" />
+              <MapPin className="w-4 h-4" />
               <span>Ver Ubicación</span>
-              <ExternalLink className="w-3 h-3 opacity-80" />
+              <ExternalLink className="w-3.5 h-3.5 opacity-80" />
             </a>
           </div>
         </motion.div>
@@ -444,11 +457,10 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
 
       {/* =========================================================================
           SECCIÓN 6 - CONFIRMACIÓN (RSVP)
-          WhatsApp icon, Script title: "Confirmación",
-          Text: "Nos encantará saber que nos acompañarás...",
-          Button: "Confirma Aquí" (redirects to WhatsApp)
+          Icono de WhatsApp, título Script "Confirmación",
+          texto y botón "Confirma Aquí"
       ========================================================================== */}
-      <section className="py-10 px-6 text-center">
+      <section className="py-8 px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -456,8 +468,8 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
           transition={{ duration: 0.6 }}
           className="max-w-xs mx-auto p-6 rounded-3xl bg-white border border-[#8A9A83]/30 shadow-md"
         >
-          <div className="w-12 h-12 rounded-full bg-[#EBF3EC] text-[#8A9A83] mx-auto flex items-center justify-center shadow-xs mb-2">
-            <MessageCircle className="w-6 h-6" />
+          <div className="w-12 h-12 rounded-full bg-[#EBF3EC] text-[#25D366] mx-auto flex items-center justify-center shadow-xs mb-2">
+            <MessageCircle className="w-6 h-6 fill-[#25D366]/20" />
           </div>
 
           <h3 className="font-script text-4xl text-[#555A4F] mb-1">
@@ -465,28 +477,27 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
           </h3>
 
           <p className="text-xs text-[#555A4F] font-sans-clean leading-relaxed my-3">
-            Nos encantará saber que nos acompañarás en este día tan especial. Por favor confírmanos tu asistencia.
+            Nos llenará de alegría contar con tu presencia en este momento tan especial. Por favor confírmanos tu asistencia al <strong>{config.hostPhone.replace(/^57/, '')}</strong>.
           </p>
 
           <button
             onClick={handleWhatsAppRsvp}
-            className="w-full py-3 px-6 rounded-xl bg-[#8A9A83] hover:bg-[#788871] text-white font-sans-clean font-semibold text-xs uppercase tracking-wider shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-3.5 px-6 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-sans-clean font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
           >
-            <MessageCircle className="w-4 h-4" />
-            <span>Confirma Aquí</span>
+            <MessageCircle className="w-4 h-4 fill-white" />
+            <span>Confirma Aquí por WhatsApp</span>
           </button>
         </motion.div>
       </section>
 
       {/* =========================================================================
-          SECCIÓN 7 - REGALOS Y CIERRE
-          Money envelope icon, Script title: "Sugerencia de regalos",
-          Text: "Tu presencia es lo más importante... Lluvia de sobres",
-          Final teddy bear image,
-          Final Script title: "Te Esperamos",
-          Final text: "Con mucho amor"
+          SECCIÓN 7 - LISTA DE REGALOS & CIERRE
+          Icono de sobre de dinero, título Script "Lista de Regalos",
+          Lluvia de sobres + opciones de regalo sugeridas,
+          Ilustración final del osito durmiente en SVG,
+          Título Script "Te Esperamos" y "Con mucho amor".
       ========================================================================== */}
-      <section className="py-10 px-6 text-center">
+      <section className="py-8 px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -499,51 +510,63 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config, 
           </div>
 
           <h3 className="font-script text-4xl text-[#555A4F] mb-1">
-            Sugerencia de regalos
+            Lista de Regalos
           </h3>
 
-          <p className="text-xs text-[#555A4F] font-sans-clean leading-relaxed mt-2">
+          <p className="text-xs text-[#555A4F] font-sans-clean leading-relaxed mt-2 mb-4">
             {config.giftNote}
           </p>
-          <div className="mt-3 inline-block px-3.5 py-1 rounded-full bg-[#FAF4ED] border border-[#C6A67A]/40 text-[#A8885B] text-xs font-semibold">
-            ✉️ Lluvia de sobres
+
+          {/* Lluvia de Sobres Card */}
+          <div className="p-4 rounded-2xl bg-[#FAF4ED] border border-[#C6A67A]/50 text-left mb-4 shadow-2xs">
+            <div className="flex items-center gap-2 font-sans-clean font-bold text-xs text-[#8c6738]">
+              <Mail className="w-4 h-4 text-[#C6A67A]" />
+              <span>Lluvia de Sobres</span>
+            </div>
+            <p className="text-[11px] text-[#555A4F] mt-1.5 leading-relaxed font-sans-clean">
+              Dispondremos de un cofre especial en el salón para quienes deseen hacernos su regalo en sobre para el ajuar de Benjamín.
+            </p>
           </div>
+
+          {/* Lista de sugerencias */}
+          {config.giftItems && config.giftItems.length > 0 && (
+            <div className="space-y-1.5 text-left">
+              <span className="text-[10px] font-sans-clean uppercase tracking-wider font-bold text-[#8A9A83] block mb-1">
+                Sugerencias para el bebé:
+              </span>
+              {config.giftItems.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="px-3 py-2 rounded-xl bg-[#F9F6F0] border border-[#8A9A83]/20 text-[11px] text-[#4A4A4A] flex items-center gap-2"
+                >
+                  <Sparkles className="w-3 h-3 text-[#C6A67A] shrink-0" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </motion.div>
 
-        {/* Final Teddy Bear & Closure Message */}
+        {/* Final Bespoke Sitting Teddy Bear SVG & Romantic Closure */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="space-y-3"
+          className="space-y-2 flex flex-col items-center"
         >
-          <div className="text-5xl animate-gentle-float">
-            🧸
-          </div>
+          <TeddyBearFinal className="w-32 h-32 animate-gentle-float" />
 
-          <h3 className="font-script text-5xl sm:text-6xl text-[#555A4F]">
+          <h3 className="font-script text-5xl sm:text-6xl text-[#555A4F] pt-1">
             {config.closureTitle}
           </h3>
 
-          <div className="flex items-center justify-center gap-2 text-xs font-sans-clean text-[#8A9A83] font-semibold">
+          <div className="flex items-center justify-center gap-2 text-xs font-sans-clean text-[#8A9A83] font-bold">
             <Heart className="w-3.5 h-3.5 text-[#8A9A83] fill-[#8A9A83]" />
             <span>{config.closureText}</span>
             <Heart className="w-3.5 h-3.5 text-[#8A9A83] fill-[#8A9A83]" />
           </div>
         </motion.div>
-
-        {/* Edit Button for Host/Friend */}
-        {onEditRequested && (
-          <div className="mt-12 pt-6 border-t border-stone-200">
-            <button
-              onClick={onEditRequested}
-              className="text-[11px] font-sans-clean text-stone-400 hover:text-stone-700 underline cursor-pointer"
-            >
-              Editar datos de la invitación (Nombre, padres, fecha, lugar)
-            </button>
-          </div>
-        )}
       </section>
     </div>
   );

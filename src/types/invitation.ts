@@ -11,7 +11,7 @@ export interface InvitationConfig {
   monthNumber: string;
   monthName: string;
   yearShort: string;
-  fullDateTarget: string; // ISO date for countdown: 2026-06-20T16:00:00
+  fullDateTarget: string; // ISO date for countdown: 2026-11-29T14:00:00
   timeString: string;
 
   // Venue
@@ -25,6 +25,7 @@ export interface InvitationConfig {
 
   // Gifts
   giftNote: string;
+  giftItems?: string[];
   closureTitle: string;
   closureText: string;
 
