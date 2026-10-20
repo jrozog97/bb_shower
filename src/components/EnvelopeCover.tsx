@@ -31,15 +31,19 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, babyName }
       exit={{ opacity: 0, y: -120, transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] } }}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 boho-bg select-none overflow-hidden"
     >
-      {/* Decorative Floating Soft SVG Clouds and Accents */}
+      {/* Decorative Floating Soft SVG Clouds and Balloon Accents */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-8 left-4 opacity-75 animate-gentle-float">
-          <BohoCloud className="w-28 h-16" withStar />
+        <div className="absolute top-6 left-3 opacity-75 animate-gentle-float">
+          <BohoCloud className="w-24 h-14" withStar />
         </div>
-        <div className="absolute top-16 right-6 opacity-65 animate-gentle-float" style={{ animationDelay: '1.8s' }}>
-          <BohoCloud className="w-32 h-18" />
+        <div className="absolute top-6 right-4 opacity-85 animate-gentle-float" style={{ animationDelay: '1.2s' }}>
+          <img
+            src="/assets/balloon-bear.png"
+            alt="Globo aerostático de Benjamín"
+            className="w-16 h-auto object-contain drop-shadow-sm"
+          />
         </div>
-        <div className="absolute bottom-16 left-8 opacity-60 animate-gentle-float" style={{ animationDelay: '2.8s' }}>
+        <div className="absolute bottom-12 left-6 opacity-60 animate-gentle-float" style={{ animationDelay: '2.8s' }}>
           <BohoCloud className="w-24 h-14" withStar />
         </div>
       </div>
@@ -80,7 +84,7 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, babyName }
             
             <div className="w-full aspect-square bg-black rounded-2xs overflow-hidden border border-stone-100 shadow-inner relative">
               <img
-                src="/assets/aistudio/image_067f9cf5.png"
+                src="/assets/ultrasound-cover.png"
                 alt={`Ecografía de ${babyName}`}
                 className="w-full h-full object-cover"
               />
@@ -88,8 +92,8 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, babyName }
                 ECO 4D
               </span>
             </div>
-            <p className="text-[9px] font-script text-center text-[#555A4F] mt-1.5 font-bold tracking-wide">
-              {babyName} 👶✨
+            <p className="text-[10px] font-script text-center text-[#555A4F] mt-1.5 font-bold tracking-wide">
+              {babyName}
             </p>
           </div>
 

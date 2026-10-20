@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { InvitationConfig } from '../types/invitation';
 import { audioPlayer } from '../utils/audioPlayer';
-import { HotAirBalloonBear, BuntingGarland, TeddyBearFinal } from './BohoIcons';
+import { BuntingGarland } from './BohoIcons';
 import { StoryUltrasoundItinerary } from './StoryUltrasoundItinerary';
 
 interface InvitationMainViewProps {
@@ -132,7 +132,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           </span>
         </motion.div>
 
-        {/* Bespoke Hot Air Balloon with Teddy Bear (High Quality SVG) */}
+        {/* Acuarela del Osito en Globo Aerostático (/assets/balloon-bear.png) */}
         <motion.div
           initial={{ scale: 0.88, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
@@ -140,7 +140,11 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           transition={{ duration: 0.85, ease: 'easeOut' }}
           className="relative my-2 flex items-center justify-center animate-gentle-float"
         >
-          <HotAirBalloonBear className="w-52 h-64 drop-shadow-sm" />
+          <img
+            src="/assets/balloon-bear.png"
+            alt="Osito en globo aerostático de Benjamín"
+            className="w-56 sm:w-64 h-auto max-h-72 object-contain drop-shadow-md"
+          />
         </motion.div>
 
         {/* Emotive Welcome Phrase & Scripture from PDF */}
@@ -171,8 +175,104 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
       </section>
 
       {/* =========================================================================
-          SECCIÓN 2 - LOS PADRES
-          "Mis papis: ALEJANDRA Y ANDRÉS" + 2 Polaroids asimétricas
+          SECCIÓN 2 - EL BEBÉ
+          Guirnalda de banderines en SVG, Cubitos BABY (/assets/baby-cubes.png),
+          Nombre gigante en Script: "Benjamín" +
+          Díptico Polaroid: Ecografía real de Benjamín (Imagen 2) + Bebé dormido
+      ========================================================================== */}
+      <section className="py-8 px-6 text-center">
+        {/* SVG Bunting Garland */}
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0.8 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
+          viewport={{ once: true }}
+          className="max-w-xs mx-auto mb-1"
+        >
+          <BuntingGarland className="w-full h-8" />
+        </motion.div>
+
+        {/* Cubos de madera BABY en acuarela (/assets/baby-cubes.png) */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex justify-center mb-1"
+        >
+          <img
+            src="/assets/baby-cubes.png"
+            alt="Cubos BABY de madera"
+            className="w-28 h-auto object-contain drop-shadow-xs"
+          />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="text-[10px] font-sans-clean uppercase tracking-[0.3em] text-[#8A9A83] font-bold">
+            MI BABY SHOWER
+          </span>
+          <h2 className="font-script text-6xl sm:text-7xl text-[#555A4F] my-1 drop-shadow-xs">
+            {config.babyName}
+          </h2>
+        </motion.div>
+
+        {/* Galería Polaroid de Benjamín: Ecografía de Benjamín (Imagen 2) + Bebé Dormido */}
+        <div className="relative w-full max-w-xs mx-auto h-64 flex items-center justify-center mt-3">
+          {/* Polaroid 1: Ecografía real de Benjamín (Imagen 2 debajo de su nombre) */}
+          <motion.div
+            initial={{ opacity: 0, x: -20, rotate: -6 }}
+            whileInView={{ opacity: 1, x: 0, rotate: -4 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="absolute left-1 top-2 w-40 polaroid-frame rotate-[-4deg] z-10"
+          >
+            <div className="aspect-square w-full overflow-hidden bg-black rounded-2xs relative">
+              <img
+                src={config.ultrasoundPhotoUrl}
+                alt="Ecografía de Benjamín"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute top-1.5 right-1.5 px-2 py-0.5 rounded-full bg-black/60 text-[8px] font-sans-clean font-bold text-white shadow-2xs">
+                ECO 4D
+              </div>
+            </div>
+            <p className="font-handwriting text-xs text-[#8A9A83] font-bold text-center mt-2">
+              ¡Hola a todos!
+            </p>
+          </motion.div>
+
+          {/* Polaroid 2: Acuarela del Bebé Benjamín recién nacido dormido */}
+          <motion.div
+            initial={{ opacity: 0, x: 20, rotate: 6 }}
+            whileInView={{ opacity: 1, x: 0, rotate: 4 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="absolute right-1 top-5 w-40 polaroid-frame rotate-[4deg] z-20"
+          >
+            <div className="aspect-square w-full overflow-hidden bg-[#FAF4ED] rounded-2xs relative flex items-center justify-center p-1">
+              <img
+                src="/assets/baby-sleeping.png"
+                alt="Benjamín dormidito en su mantita"
+                className="w-full h-full object-contain drop-shadow-xs"
+              />
+              <div className="absolute top-1.5 right-1.5 px-2 py-0.5 rounded-full bg-[#EBF3EC] text-[8px] font-sans-clean font-bold text-[#6E8168] shadow-2xs">
+                Dulces Sueños
+              </div>
+            </div>
+            <p className="font-handwriting text-xs text-stone-600 font-bold text-center mt-2">
+              Soñando contigo
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECCIÓN 3 - LOS PADRES Y LA FAMILIA (FOTOS JUNTAS ABAJO SIN EMOJIS)
+          "Mis papis: ALEJANDRA Y ANDRÉS" + 2 Polaroids con fotos reales sin emojis
       ========================================================================== */}
       <section className="py-8 px-6 text-center">
         <motion.div
@@ -192,9 +292,9 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           </p>
         </motion.div>
 
-        {/* 2 Polaroids Superimposed and Asymmetrically Rotated */}
+        {/* 2 Polaroids Superimposed and Asymmetrically Rotated (Sin Emojis) */}
         <div className="relative w-full max-w-xs mx-auto h-64 flex items-center justify-center">
-          {/* Polaroid 1 (Left, rotated -4deg) */}
+          {/* Polaroid 1 (Left, rotated -4deg): Alejandra y Andrés */}
           <motion.div
             initial={{ opacity: 0, x: -30, rotate: -8 }}
             whileInView={{ opacity: 1, x: 0, rotate: -4 }}
@@ -210,11 +310,11 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
               />
             </div>
             <p className="font-handwriting text-xs text-stone-600 text-center mt-2 font-semibold">
-              Juntos en la dulce espera 💕
+              Juntos en la dulce espera
             </p>
           </motion.div>
 
-          {/* Polaroid 2 (Right, rotated +5deg) */}
+          {/* Polaroid 2 (Right, rotated +5deg): Perrito de la familia */}
           <motion.div
             initial={{ opacity: 0, x: 30, rotate: 10 }}
             whileInView={{ opacity: 1, x: 0, rotate: 5 }}
@@ -225,68 +325,29 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
             <div className="aspect-square w-full overflow-hidden bg-stone-100 rounded-2xs">
               <img
                 src={config.parentPhoto2Url}
-                alt="Amor de papás"
+                alt="Amor de familia"
                 className="w-full h-full object-cover"
               />
             </div>
             <p className="font-handwriting text-xs text-stone-600 text-center mt-2 font-semibold">
-              Contando los días ✨
+              Contando los días
             </p>
           </motion.div>
         </div>
-      </section>
 
-      {/* =========================================================================
-          SECCIÓN 3 - EL BEBÉ
-          Guirnalda de banderines en SVG, "MI BABY SHOWER",
-          Nombre gigante en Script: "Benjamín" + Foto Polaroid Ecografía
-      ========================================================================== */}
-      <section className="py-8 px-6 text-center">
-        {/* SVG Bunting Garland */}
+        {/* Tierno Elefantito en Acuarela (/assets/baby-elephant.png) */}
         <motion.div
-          initial={{ opacity: 0, scaleX: 0.8 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true }}
-          className="max-w-xs mx-auto mb-3"
-        >
-          <BuntingGarland className="w-full h-8" />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="text-[10px] font-sans-clean uppercase tracking-[0.3em] text-[#8A9A83] font-bold">
-            MI BABY SHOWER
-          </span>
-          <h2 className="font-script text-6xl sm:text-7xl text-[#555A4F] my-1 drop-shadow-xs">
-            {config.babyName}
-          </h2>
-        </motion.div>
-
-        {/* Centered Polaroid Ultrasound Photo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-48 mx-auto mt-4 polaroid-frame"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex justify-center -mt-2 mb-1"
         >
-          <div className="aspect-square w-full overflow-hidden bg-stone-100 rounded-2xs relative">
-            <img
-              src={config.ultrasoundPhotoUrl}
-              alt="Ecografía de Benjamín"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute top-1.5 right-1.5 px-2 py-0.5 rounded-full bg-white/90 text-[9px] font-sans-clean font-bold text-stone-600 shadow-2xs">
-              Ecografía
-            </div>
-          </div>
-          <p className="font-handwriting text-sm text-[#8A9A83] font-bold text-center mt-2.5">
-            ¡Hola a todos! Soy Benjamín 👶✨
-          </p>
+          <img
+            src="/assets/baby-elephant.png"
+            alt="Elefantito tierno de la familia"
+            className="w-24 h-auto object-contain drop-shadow-sm opacity-95"
+          />
         </motion.div>
       </section>
 
@@ -532,8 +593,17 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
             {config.giftNote}
           </p>
 
+          {/* Ilustración de ajuar para la lista de regalos (/assets/baby-layette.png) */}
+          <div className="my-3 flex justify-center">
+            <img
+              src="/assets/baby-layette.png"
+              alt="Ajuar y ropita para Benjamín"
+              className="w-36 sm:w-40 h-auto object-contain drop-shadow-sm"
+            />
+          </div>
+
           {/* Enlace anclado directo a la lista de regalos en Pepe Ganga */}
-          <div className="mt-3 mb-4">
+          <div className="mt-1 mb-4">
             <a
               href={config.giftListUrl || 'https://www.pepeganga.com/bebes'}
               target="_blank"
@@ -558,7 +628,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           </div>
         </motion.div>
 
-        {/* Final Bespoke Sitting Teddy Bear SVG & Romantic Closure */}
+        {/* Acuarela del Osito con Globos en el Cierre (/assets/teddy-balloons.png) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -566,7 +636,11 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           transition={{ duration: 0.7 }}
           className="space-y-2 flex flex-col items-center"
         >
-          <TeddyBearFinal className="w-32 h-32 animate-gentle-float" />
+          <img
+            src="/assets/teddy-balloons.png"
+            alt="Osito con globos de Benjamín"
+            className="w-44 sm:w-48 h-auto object-contain animate-gentle-float drop-shadow-md"
+          />
 
           <h3 className="font-script text-5xl sm:text-6xl text-[#555A4F] pt-1">
             {config.closureTitle}

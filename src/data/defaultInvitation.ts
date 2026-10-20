@@ -28,8 +28,8 @@ export const defaultInvitationConfig: InvitationConfig = {
   closureTitle: 'Te Esperamos',
   closureText: 'Con mucho amor',
 
-  // Curated high-aesthetic soft photography
-  parentPhoto1Url: 'https://images.unsplash.com/photo-1544126592-807ade215a0b?auto=format&fit=crop&w=700&q=80',
-  parentPhoto2Url: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=700&q=80',
-  ultrasoundPhotoUrl: '/assets/aistudio/image_067f9cf5.png',
+  // Curated personal photography provided by the user
+  parentPhoto1Url: '/assets/parents-alejandra-andres.png',
+  parentPhoto2Url: '/assets/family-dog.png',
+  ultrasoundPhotoUrl: '/assets/ultrasound-benjamin.png',
 };

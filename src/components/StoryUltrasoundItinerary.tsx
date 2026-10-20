@@ -47,11 +47,11 @@ const chapters: ItineraryChapter[] = [
   {
     id: 4,
     time: '5:45 PM',
-    chapterTitle: 'Capítulo 4: Lluvia de Sobres y Amor',
-    medicalNote: 'ECO-DETECCIÓN · ABRAZOS Y DETALLES',
-    badgeLabel: 'Lluvia de Sobres',
+    chapterTitle: 'Capítulo 4: Lista de Regalos y Ajuar',
+    medicalNote: 'ECO-DETECCIÓN · ABRAZOS Y REGALITOS',
+    badgeLabel: 'Regalos con Amor',
     babyPose: 'gift',
-    storyText: 'Mis papis recibirán con todo el agradecimiento sus sobres y regalitos para mi ajuar en el cofre del salón. ¡Cada detalle guardará su inmenso cariño para cuando nazca!',
+    storyText: 'Mis papis recibirán con todo el cariño los regalitos de mi ajuar elegidos con amor en Pepe Ganga y sus detalles especiales. ¡Cada regalo guardará su inmenso afecto para cuando nazca!',
     bpm: 148,
   },
   {
