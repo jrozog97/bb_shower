@@ -40,7 +40,7 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, babyName }
           <img
             src="/assets/balloon-bear.png"
             alt="Globo aerostático de Benjamín"
-            className="w-16 h-auto object-contain drop-shadow-sm"
+            className="w-16 h-auto object-contain"
           />
         </div>
         <div className="absolute bottom-12 left-6 opacity-60 animate-gentle-float" style={{ animationDelay: '2.8s' }}>

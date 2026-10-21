@@ -21,6 +21,7 @@ export interface InvitationConfig {
 
   // RSVP WhatsApp
   hostPhone: string;
+  hostPhoneSecondary?: string;
   rsvpMessage: string;
 
   // Gifts

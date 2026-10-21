@@ -19,7 +19,8 @@ export const defaultInvitationConfig: InvitationConfig = {
   venueAddress: 'Calle 151b # 103f-41',
   googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Calle+151b+%23+103f-41+Suba+Bogota',
 
-  hostPhone: '573163366206',
+  hostPhone: '573143899735',
+  hostPhoneSecondary: '573163366206',
   rsvpInstruction: 'Confirma tu asistencia por WhatsApp a este número, indicando tu nombre completo y si asistirás o no. Así podremos llevar nuestro registro. ¡Te esperamos con mucho amor!',
   rsvpMessage: '¡Hola Alejandra y Andrés! Confirmo mi asistencia al Baby Shower de Benjamín 🧸✨\n\nNombre completo: \n¿Asistiré?: ',
 
