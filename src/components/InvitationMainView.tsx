@@ -23,6 +23,7 @@ import { InvitationConfig } from '../types/invitation';
 import { audioPlayer } from '../utils/audioPlayer';
 import { BuntingGarland } from './BohoIcons';
 import { StoryUltrasoundItinerary } from './StoryUltrasoundItinerary';
+import { GiftRegistrySection } from './GiftRegistrySection';
 
 interface InvitationMainViewProps {
   config: InvitationConfig;
@@ -653,78 +654,15 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
       </section>
 
       {/* =========================================================================
-          SECCIÓN 7 - LISTA DE REGALOS (PEPE GANGA) & CIERRE
-          Texto exacto del PDF: "Te compartimos nuestra lista de regalos para nuestro bebé..."
-          Con enlace interactivo anclado y compra en punto físico de Pepe Ganga.
+          SECCIÓN 7 - LISTA OFICIAL DE REGALOS (PEPE GANGA / CONTINENTE #11349)
+          Reemplazada por el catálogo completo de 80 artículos del PDF actualizado
+      ========================================================================== */}
+      <GiftRegistrySection giftNote={config.giftNote} />
+
+      {/* =========================================================================
+          SECCIÓN 8 - CIERRE CON AMOR
       ========================================================================== */}
       <section className="py-8 px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-xs mx-auto p-6 rounded-3xl bg-white border border-[#C6A67A]/40 shadow-md mb-8"
-        >
-          <div className="w-12 h-12 rounded-full bg-[#FAF4ED] text-[#C6A67A] mx-auto flex items-center justify-center shadow-xs mb-2">
-            <Gift className="w-6 h-6" />
-          </div>
-
-          <h3 className="font-script text-4xl text-[#555A4F] mb-1">
-            Lista de Regalos
-          </h3>
-
-          {/* Mensaje exacto del PDF */}
-          <p className="text-xs text-[#555A4F] font-sans-clean leading-relaxed mt-2 mb-4">
-            {config.giftNote}
-          </p>
-
-          {/* Código oficial de lista en Pepe Ganga / Continente */}
-          <div className="mb-3.5 p-3 rounded-2xl bg-[#FAF4ED] border border-[#C6A67A]/60 text-center shadow-2xs">
-            <span className="text-[10px] font-sans-clean uppercase tracking-wider text-[#8c6738] font-bold block mb-0.5">
-              Lista Registrada en Pepe Ganga / Continente
-            </span>
-            <div className="text-base font-mono font-bold text-[#555A4F] tracking-wide">
-              No. de Lista: 11349
-            </div>
-            <p className="text-[11px] text-stone-600 font-sans-clean mt-0.5">
-              A nombre de: <strong>Alejandra Velandia Romero</strong>
-            </p>
-          </div>
-
-          {/* Ilustración de ajuar para la lista de regalos (/assets/baby-layette.png) */}
-          <div className="my-2.5 flex justify-center">
-            <img
-              src="/assets/baby-layette.png"
-              alt="Ajuar y ropita para Benjamín"
-              className="w-36 sm:w-40 h-auto object-contain"
-            />
-          </div>
-
-          {/* Enlace anclado directo a la lista de regalos en Pepe Ganga */}
-          <div className="mt-1 mb-4">
-            <a
-              href={config.giftListUrl || 'https://www.pepeganga.com/bebes'}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-5 rounded-xl bg-[#8A9A83] hover:bg-[#788871] text-white font-sans-clean font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer group"
-            >
-              <ShoppingBag className="w-4 h-4" />
-              <span>Ver Lista en Pepe Ganga</span>
-              <ExternalLink className="w-3.5 h-3.5 opacity-80 group-hover:translate-x-0.5 transition-transform" />
-            </a>
-          </div>
-
-          {/* Tarjeta explicativa sobre punto físico de Pepe Ganga */}
-          <div className="p-3.5 rounded-2xl bg-[#FAF4ED] border border-[#C6A67A]/50 text-left shadow-2xs">
-            <div className="flex items-center gap-2 font-sans-clean font-bold text-xs text-[#8c6738]">
-              <Sparkles className="w-3.5 h-3.5 text-[#C6A67A]" />
-              <span>Compra en Punto Físico</span>
-            </div>
-            <p className="text-[11px] text-[#555A4F] mt-1.5 leading-relaxed font-sans-clean">
-              Solo debes escoger uno de los regalitos en el enlace o dictar el número de lista <strong>11349</strong> en tu punto físico de <strong>Pepe Ganga</strong> más cercano.
-            </p>
-          </div>
-        </motion.div>
 
         {/* Acuarela del Osito con Globos en el Cierre (/assets/teddy-balloons.png) */}
         <motion.div
