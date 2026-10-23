@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { 
   Volume2, 
   VolumeX, 
   MapPin, 
   MessageCircle, 
-  Mail, 
   Calendar,
-  ExternalLink,
   Heart,
   Sparkles,
-  Gift,
-  ShoppingBag,
   Phone,
-  Copy,
-  Check,
-  X,
-  Send,
-  UserCheck
+  Send
 } from 'lucide-react';
 import { InvitationConfig } from '../types/invitation';
 import { audioPlayer } from '../utils/audioPlayer';
@@ -80,43 +72,23 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
     return () => clearInterval(interval);
   }, [config.fullDateTarget]);
 
-  // RSVP phone handling & modal state
-  const [isRsvpModalOpen, setIsRsvpModalOpen] = useState(false);
-  const [guestName, setGuestName] = useState('');
-  const [guestAttendance, setGuestAttendance] = useState<'yes' | 'no'>('yes');
-  const [guestCount, setGuestCount] = useState(1);
-  const [isCopied, setIsCopied] = useState(false);
-
+  // RSVP phone handling
   const phonePrimary = (config.hostPhone || '573143899735').replace(/\D/g, '');
   const phoneSecondary = (config.hostPhoneSecondary || '573163366206').replace(/\D/g, '');
   
   const displayPhonePrimary = '314 389 9735';
   const displayPhoneSecondary = '316 336 6206';
 
-  const generateRsvpText = () => {
-    if (!guestName.trim()) {
-      return config.rsvpMessage;
-    }
-    const attendanceText = guestAttendance === 'yes' 
-      ? `Sí asistiré con alegría (${guestCount} ${guestCount === 1 ? 'persona' : 'personas'})` 
-      : 'Lamentablemente no podré asistir pero les mando un abrazo gigante';
-    return `¡Hola Alejandra y Andrés! Confirmo mi asistencia al Baby Shower de Benjamín 🧸✨\n\nNombre: ${guestName.trim()}\nRespuesta: ${attendanceText}`;
-  };
+  const defaultRsvpMessage = '¡Hola Andrés y Alejandra! Confirmo mi asistencia al Baby Shower de Benjamín 🧸✨\n\nNombre completo: \n¿Asistiré?: ';
 
-  const getWaLink = (phone: string, customText?: string) => {
-    const text = customText || generateRsvpText();
+  const getWaLink = (phone: string) => {
+    const text = config.rsvpMessage || defaultRsvpMessage;
     return `https://api.whatsapp.com/send/?phone=${phone}&text=${encodeURIComponent(text)}`;
   };
 
-  const getSmsLink = (phone: string, customText?: string) => {
-    const text = customText || generateRsvpText();
+  const getSmsLink = (phone: string) => {
+    const text = config.rsvpMessage || defaultRsvpMessage;
     return `sms:+${phone}?body=${encodeURIComponent(text)}`;
-  };
-
-  const handleCopyMessage = (textToCopy: string) => {
-    navigator.clipboard.writeText(textToCopy);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2500);
   };
 
   // Google Calendar URL generator
@@ -164,7 +136,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           transition={{ duration: 0.6 }}
           className="mb-3 px-2 max-w-sm"
         >
-          <span className="inline-block px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-[#EBF3EC] border border-[#8A9A83]/40 text-base sm:text-lg font-handwriting text-[#4F6449] font-bold tracking-wide shadow-xs">
+          <span className="inline-block px-6 py-2.5 sm:px-7 sm:py-3 rounded-full bg-[#EBF3EC] border border-[#8A9A83]/40 text-lg sm:text-xl font-handwriting text-[#4F6449] font-bold tracking-wide shadow-xs">
             {config.welcomeCurvedText}
           </span>
         </motion.div>
@@ -192,19 +164,19 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mt-2 max-w-sm mx-auto px-3"
         >
-          <h1 className="font-script text-4xl sm:text-5xl text-[#555A4F] leading-tight">
+          <h1 className="font-serif-clean font-bold text-2xl sm:text-3xl text-[#555A4F] leading-tight mb-1">
             Una nueva historia
           </h1>
-          <p className="font-serif-clean text-lg sm:text-xl text-[#555A4F] font-medium mt-1 leading-snug">
+          <p className="font-serif-clean text-lg sm:text-xl text-[#555A4F] font-medium leading-snug">
             está por comenzar, y nos hace felices saber que hay personas como tú con quienes compartirla.
           </p>
 
           {/* Cita bíblica según el PDF: “Todo lo hizo hermoso en su tiempo.” Eclesiastés 3:11 */}
           <div className="mt-4 pt-3.5 border-t border-[#8A9A83]/25 max-w-xs mx-auto">
-            <p className="font-serif-clean italic text-base sm:text-lg text-[#6E8168] font-medium leading-relaxed">
+            <p className="font-serif-clean italic text-lg sm:text-xl text-[#6E8168] font-semibold leading-relaxed">
               &ldquo;Todo lo hizo hermoso en su tiempo.&rdquo;
             </p>
-            <span className="text-xs sm:text-sm font-sans-clean uppercase tracking-[0.2em] text-[#C6A67A] font-bold block mt-1">
+            <span className="text-sm sm:text-base font-sans-clean uppercase tracking-[0.2em] text-[#C6A67A] font-bold block mt-1.5">
               Eclesiastés 3:11
             </span>
           </div>
@@ -346,7 +318,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
                 className="w-full h-full object-cover object-[center_20%]"
               />
             </div>
-            <p className="font-handwriting text-sm text-stone-700 text-center mt-2 font-bold">
+            <p className="font-handwriting text-base sm:text-lg text-stone-800 text-center mt-2 font-bold tracking-wide">
               Juntos en la dulce espera
             </p>
           </motion.div>
@@ -366,7 +338,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
                 className="w-full h-full object-cover"
               />
             </div>
-            <p className="font-handwriting text-sm text-stone-700 text-center mt-2 font-bold">
+            <p className="font-handwriting text-base sm:text-lg text-stone-800 text-center mt-2 font-bold tracking-wide">
               Contando los días
             </p>
           </motion.div>
@@ -540,9 +512,6 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
             <p className="font-sans-clean font-bold text-base sm:text-lg text-[#4A4A4A] leading-snug">
               Ubicación por confirmar
             </p>
-            <p className="text-xs sm:text-sm text-[#555A4F] font-sans-clean max-w-xs mx-auto leading-relaxed">
-              Estamos ultimando los detalles del salón en Bogotá. Te lo compartiremos muy pronto con la ubicación exacta por WhatsApp.
-            </p>
             <div className="pt-2 border-t border-[#8A9A83]/20 space-y-1">
               <p className="text-xs sm:text-sm font-bold text-[#6E8168] font-sans-clean">
                 Fecha: {config.dayName}, {config.dayNumber} de {config.monthName} de 2026
@@ -565,9 +534,8 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
 
       {/* =========================================================================
           SECCIÓN 6 - CONFIRMACIÓN (RSVP)
-          WhatsApp Principal (Alejandra: 314 389 9735),
           Contacto directo con Andrés (Llamada / SMS: 316 336 6206)
-          y Formulario de confirmación personalizado.
+          y WhatsApp Alejandra (314 389 9735).
       ========================================================================== */}
       <section className="py-8 px-6 text-center">
         <motion.div
@@ -637,15 +605,6 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
                 <span>Confirmar por WhatsApp</span>
               </a>
             </div>
-
-            {/* Botón Personalizar y Enviar en Formulario */}
-            <button
-              onClick={() => setIsRsvpModalOpen(true)}
-              className="w-full py-3 px-3.5 rounded-xl bg-[#FAF4ED] hover:bg-[#F2E8DC] text-[#8c6738] border border-[#C6A67A]/60 font-sans-clean font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs"
-            >
-              <UserCheck className="w-4 h-4 text-[#C6A67A]" />
-              <span>Personalizar Mensaje de Asistencia</span>
-            </button>
           </div>
         </motion.div>
       </section>
@@ -686,185 +645,6 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           </div>
         </motion.div>
       </section>
-
-      {/* Modal de Confirmación Personalizada & Copiar Mensaje */}
-      <AnimatePresence>
-        {isRsvpModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 15 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 15 }}
-              className="w-full max-w-sm bg-white rounded-3xl p-5 shadow-2xl border-2 border-[#C6A67A]/50 relative text-left max-h-[90vh] overflow-y-auto"
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setIsRsvpModalOpen(false)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-500 cursor-pointer"
-                title="Cerrar"
-              >
-                <X className="w-4 h-4" />
-              </button>
-
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-8 h-8 rounded-full bg-[#EBF3EC] flex items-center justify-center text-[#25D366]">
-                  <MessageCircle className="w-4 h-4 fill-[#25D366]/20" />
-                </div>
-                <div>
-                  <h4 className="font-serif-clean font-bold text-base text-[#4A4A4A]">
-                    Confirmar Asistencia
-                  </h4>
-                  <p className="text-[10px] text-stone-500 font-sans-clean">
-                    Baby Shower de Benjamín
-                  </p>
-                </div>
-              </div>
-
-              {/* Form Fields */}
-              <div className="space-y-3 my-3">
-                <div>
-                  <label className="block text-[11px] font-sans-clean font-bold text-[#555A4F] mb-1">
-                    Tu Nombre Completo:
-                  </label>
-                  <input
-                    type="text"
-                    value={guestName}
-                    onChange={(e) => setGuestName(e.target.value)}
-                    placeholder="Ej. Familia Velandia"
-                    className="w-full px-3 py-2 rounded-xl border border-stone-300 text-xs text-[#4A4A4A] focus:outline-hidden focus:border-[#8A9A83]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-sans-clean font-bold text-[#555A4F] mb-1">
-                    ¿Asistirás al baby shower?
-                  </label>
-                  <div className="grid grid-cols-2 gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setGuestAttendance('yes')}
-                      className={`py-2 px-2.5 rounded-xl text-xs font-sans-clean font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                        guestAttendance === 'yes'
-                          ? 'bg-[#8A9A83] text-white shadow-xs'
-                          : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                      }`}
-                    >
-                      <Check className="w-3 h-3" />
-                      <span>Sí asistiré</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setGuestAttendance('no')}
-                      className={`py-2 px-2.5 rounded-xl text-xs font-sans-clean font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                        guestAttendance === 'no'
-                          ? 'bg-[#C6A67A] text-white shadow-xs'
-                          : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                      }`}
-                    >
-                      <span>No podré ir</span>
-                    </button>
-                  </div>
-                </div>
-
-                {guestAttendance === 'yes' && (
-                  <div>
-                    <label className="block text-[11px] font-sans-clean font-bold text-[#555A4F] mb-1">
-                      Número de personas que van:
-                    </label>
-                    <div className="flex items-center gap-3">
-                      <button
-                        type="button"
-                        onClick={() => setGuestCount((c) => Math.max(1, c - 1))}
-                        className="w-8 h-8 rounded-lg bg-stone-100 hover:bg-stone-200 font-bold text-stone-700 flex items-center justify-center cursor-pointer"
-                      >
-                        -
-                      </button>
-                      <span className="font-serif-clean font-bold text-sm text-[#4A4A4A]">
-                        {guestCount} {guestCount === 1 ? 'persona' : 'personas'}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => setGuestCount((c) => c + 1)}
-                        className="w-8 h-8 rounded-lg bg-stone-100 hover:bg-stone-200 font-bold text-stone-700 flex items-center justify-center cursor-pointer"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {/* Preview Message Box */}
-                <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-stone-200">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] font-mono text-stone-500 uppercase">Mensaje listo para enviar:</span>
-                    <button
-                      type="button"
-                      onClick={() => handleCopyMessage(generateRsvpText())}
-                      className="text-[10px] font-sans-clean font-bold text-[#8A9A83] hover:text-[#555A4F] flex items-center gap-1 cursor-pointer"
-                    >
-                      {isCopied ? <Check className="w-3 h-3 text-green-600" /> : <Copy className="w-3 h-3" />}
-                      <span>{isCopied ? '¡Copiado!' : 'Copiar'}</span>
-                    </button>
-                  </div>
-                  <p className="text-[11px] font-mono text-[#555A4F] whitespace-pre-line leading-relaxed">
-                    {generateRsvpText()}
-                  </p>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="space-y-2.5 pt-3 border-t border-stone-200">
-                <div className="grid grid-cols-2 gap-2">
-                  <a
-                    href={`tel:+${phoneSecondary}`}
-                    className="py-2.5 px-2 rounded-xl bg-[#FAF4ED] hover:bg-[#f2e7db] text-[#8c6738] text-xs font-sans-clean font-bold flex items-center justify-center gap-1.5 cursor-pointer border border-[#C6A67A]/40 shadow-2xs"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-[#C6A67A]" />
-                    <span>Llamar a Andrés</span>
-                  </a>
-
-                  <a
-                    href={getSmsLink(phoneSecondary)}
-                    className="py-2.5 px-2 rounded-xl bg-[#FAF4ED] hover:bg-[#f2e7db] text-[#8c6738] text-xs font-sans-clean font-bold flex items-center justify-center gap-1.5 cursor-pointer border border-[#C6A67A]/40 shadow-2xs"
-                  >
-                    <Send className="w-3.5 h-3.5 text-[#C6A67A]" />
-                    <span>SMS a Andrés</span>
-                  </a>
-                </div>
-
-                <a
-                  href={getWaLink(phonePrimary)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-3 px-3.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs sm:text-sm font-sans-clean font-bold flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-98 transition-all"
-                >
-                  <MessageCircle className="w-4 h-4 fill-white shrink-0" />
-                  <span>Enviar por WhatsApp a Alejandra</span>
-                </a>
-
-                <div className="grid grid-cols-2 gap-2 pt-0.5">
-                  <a
-                    href={getSmsLink(phonePrimary)}
-                    className="py-2 px-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-sans-clean font-semibold flex items-center justify-center gap-1 cursor-pointer"
-                  >
-                    <Send className="w-3 h-3 text-[#8A9A83]" />
-                    <span>SMS a Alejandra</span>
-                  </a>
-
-                  <button
-                    type="button"
-                    onClick={() => handleCopyMessage(generateRsvpText())}
-                    className="py-2 px-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-sans-clean font-semibold flex items-center justify-center gap-1 cursor-pointer"
-                  >
-                    <Copy className="w-3 h-3 text-[#8A9A83]" />
-                    <span>{isCopied ? '¡Copiado!' : 'Copiar Texto'}</span>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };

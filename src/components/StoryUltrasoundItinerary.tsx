@@ -119,7 +119,7 @@ export const StoryUltrasoundItinerary: React.FC = () => {
         <h3 className="font-script text-4xl sm:text-5xl text-[#555A4F] leading-tight">
           El Itinerario de Benjamín
         </h3>
-        <p className="font-serif-clean italic text-xs text-stone-600 max-w-xs mx-auto mt-1 leading-relaxed">
+        <p className="font-serif-clean italic text-sm sm:text-base text-stone-700 max-w-sm mx-auto mt-1.5 leading-relaxed font-medium">
           &ldquo;Una mirada mágica a cada momento de mi fiesta contada por mí&rdquo;
         </p>
       </motion.div>

@@ -115,8 +115,8 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, babyName }
             <RealisticWaxSeal onClick={handleOpenClick} />
 
             {/* Guest Tag */}
-            <div className="mt-3.5 px-4 py-1.5 rounded-full bg-[#F9F6F0]/95 border border-[#8A9A83]/40 text-xs font-sans-clean tracking-wider text-[#555A4F] shadow-xs font-semibold">
-              Con cariño para ti y tu familia
+            <div className="mt-3.5 px-4.5 py-1.5 rounded-full bg-[#F9F6F0]/95 border border-[#8A9A83]/40 text-xs sm:text-sm font-sans-clean tracking-wider text-[#555A4F] shadow-xs font-semibold">
+              Con cariño para ti
             </div>
           </div>
         </div>
