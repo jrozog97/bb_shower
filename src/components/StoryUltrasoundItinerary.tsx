@@ -1,6 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, Clock, Heart, BookOpen, Sparkles } from 'lucide-react';
+import bienvenidaImg from '../assets/images/itinerary_bienvenida_1792609839135.jpg';
+import juegosImg from '../assets/images/itinerary_juegos_1792609839527.jpg';
+import tortaImg from '../assets/images/itinerary_torta_1792609840561.jpg';
+import regalosImg from '../assets/images/itinerary_regalos_1792609841296.jpg';
+import despedidaImg from '../assets/images/itinerary_despedida_1792609840934.jpg';
 
 export interface ItineraryChapter {
   id: number;
@@ -20,7 +25,7 @@ const chapters: ItineraryChapter[] = [
     chapterTitle: 'Capítulo 1: La Gran Bienvenida',
     badgeLabel: 'Llegada & Brindis',
     activityNote: 'PRIMER ENCUENTRO · ABRAZOS DE BIENVENIDA',
-    imageUrl: '/src/assets/images/itinerary_bienvenida_1792609839135.jpg',
+    imageUrl: bienvenidaImg,
     imageAlt: 'Benjamín saludando feliz con globitos tiernos en su bienvenida',
     storyText: '¡Siento que ya llegaron! Abro mis ojitos con mucha alegría mientras mis papitos Andrés y Alejandra los reciben con una sonrisa gigante, música suave y deliciosas bebidas de bienvenida.',
   },
@@ -30,7 +35,7 @@ const chapters: ItineraryChapter[] = [
     chapterTitle: 'Capítulo 2: Risas y Dinámicas',
     badgeLabel: 'Juegos & Risas',
     activityNote: 'DIVERSIÓN TOTAL · PATADITAS DE ALEGRÍA',
-    imageUrl: '/src/assets/images/itinerary_juegos_1792609839527.jpg',
+    imageUrl: juegosImg,
     imageAlt: 'Benjamín jugando felizmente con bloquecitos y osito de peluche',
     storyText: '¡Escucho tantas carcajadas allá afuera! Empiezo a dar volteretas y pataditas de felicidad mientras juegan, miden la pancita de mami y comparten dinámicas inolvidables llenas de risas.',
   },
@@ -40,7 +45,7 @@ const chapters: ItineraryChapter[] = [
     chapterTitle: 'Capítulo 3: Mesa Dulce y Pastel',
     badgeLabel: 'Torta & Brindis',
     activityNote: 'MOMENTO DULCE · CELEBRACIÓN Y BENDICIONES',
-    imageUrl: '/src/assets/images/itinerary_torta_1792609840561.jpg',
+    imageUrl: tortaImg,
     imageAlt: 'Benjamín aplaudiendo frente a su hermoso pastel de baby shower',
     storyText: 'Mmm... ¡a mamá le dio antojito de algo muy dulce y especial! Compartiremos la torta más deliciosa, una mesa de postres soñada y un brindis en mi honor cargado de amor y bendiciones.',
   },
@@ -50,7 +55,7 @@ const chapters: ItineraryChapter[] = [
     chapterTitle: 'Capítulo 4: Lista de Regalos y Ajuar',
     badgeLabel: 'Regalos con Amor',
     activityNote: 'DETALLES SOÑADOS · REGALITOS PARA BENJAMÍN',
-    imageUrl: '/src/assets/images/itinerary_regalos_1792609841296.jpg',
+    imageUrl: regalosImg,
     imageAlt: 'Benjamín rodeado de tiernas cajas de regalos y zapatitos',
     storyText: 'Mis papis recibirán con todo el cariño los regalitos de mi ajuar elegidos con amor en Pepe Ganga y sus detalles especiales. ¡Cada regalito guardará su inmenso afecto para cuando nazca!',
   },
@@ -60,7 +65,7 @@ const chapters: ItineraryChapter[] = [
     chapterTitle: 'Capítulo 5: Agradecimiento y Dulces Sueños',
     badgeLabel: 'Despedida & Amor',
     activityNote: 'CORAZÓN CONTENTO · DULCES SUEÑOS',
-    imageUrl: '/src/assets/images/itinerary_despedida_1792609840934.jpg',
+    imageUrl: despedidaImg,
     imageAlt: 'Benjamín durmiendo plácidamente sobre una nube y luna de ensueño',
     storyText: 'Me voy quedando dormidito con el corazón rebosante de amor. Mis papitos les entregarán los recordatorios y nos despediremos con abrazos interminables. ¡Gracias por quererme tanto!',
   },
