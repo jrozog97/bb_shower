@@ -105,7 +105,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
 
   const getWaLink = (phone: string, customText?: string) => {
     const text = customText || generateRsvpText();
-    return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+    return `https://api.whatsapp.com/send/?phone=${phone}&text=${encodeURIComponent(text)}`;
   };
 
   const getSmsLink = (phone: string, customText?: string) => {
@@ -125,21 +125,21 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
     const details = encodeURIComponent(
       `¡Acompáñanos a celebrar el Baby Shower de ${config.babyName}!\n\n` +
       `Padres: ${config.parentsNames}\n` +
-      `Lugar: ${config.venueName} (${config.venueAddress})\n` +
+      `Lugar: Próximamente (Ubicación por confirmar en Bogotá)\n` +
       `Horario: ${config.timeString}\n` +
       `¡Te esperamos con mucho amor!`
     );
-    const location = encodeURIComponent(`${config.venueName}, ${config.venueAddress}, Bogotá, Colombia`);
+    const location = encodeURIComponent(`Próximamente, Bogotá, Colombia`);
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261129T190000Z/20261130T000000Z&details=${details}&location=${location}&sf=true&output=xml`;
   };
 
   return (
     <div className="relative w-full max-w-md mx-auto boho-bg text-[#4A4A4A] min-h-screen overflow-x-hidden pb-12 select-none">
-      {/* Floating Music Button (Top Left) */}
-      <div className="fixed top-4 left-4 z-40">
+      {/* Floating Music Button (Bottom Right) */}
+      <div className="fixed bottom-5 right-5 z-40">
         <button
           onClick={toggleMusic}
-          className="w-11 h-11 rounded-full bg-white/95 border border-[#8A9A83]/40 shadow-lg flex items-center justify-center text-[#8A9A83] hover:text-[#555A4F] hover:bg-white transition-all hover:scale-105 active:scale-95 cursor-pointer group"
+          className="w-12 h-12 rounded-full bg-white/95 border-2 border-[#8A9A83]/50 shadow-xl flex items-center justify-center text-[#8A9A83] hover:text-[#555A4F] hover:bg-white transition-all hover:scale-105 active:scale-95 cursor-pointer group"
           title={isPlaying ? 'Pausar música' : 'Reproducir música'}
         >
           {isPlaying ? (
@@ -156,15 +156,15 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           Título Script y dedicatoria emotiva.
       ========================================================================== */}
       <section className="pt-16 pb-8 px-6 text-center flex flex-col items-center relative overflow-hidden">
-        {/* Curving Welcome Phrase */}
+        {/* Curving Welcome Phrase - Letras más grandes */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-2"
+          className="mb-3 px-2 max-w-sm"
         >
-          <span className="inline-block px-4 py-1 rounded-full bg-[#EBF3EC] border border-[#8A9A83]/30 text-xs font-handwriting text-[#6E8168] font-bold tracking-wide">
+          <span className="inline-block px-5 py-2 sm:px-6 sm:py-2.5 rounded-full bg-[#EBF3EC] border border-[#8A9A83]/40 text-base sm:text-lg font-handwriting text-[#4F6449] font-bold tracking-wide shadow-xs">
             {config.welcomeCurvedText}
           </span>
         </motion.div>
@@ -195,16 +195,16 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           <h1 className="font-script text-4xl sm:text-5xl text-[#555A4F] leading-tight">
             Una nueva historia
           </h1>
-          <p className="font-serif-clean text-base sm:text-lg text-[#555A4F] font-medium mt-1 leading-snug">
+          <p className="font-serif-clean text-lg sm:text-xl text-[#555A4F] font-medium mt-1 leading-snug">
             está por comenzar, y nos hace felices saber que hay personas como tú con quienes compartirla.
           </p>
 
           {/* Cita bíblica según el PDF: “Todo lo hizo hermoso en su tiempo.” Eclesiastés 3:11 */}
-          <div className="mt-4 pt-3 border-t border-[#8A9A83]/25 max-w-xs mx-auto">
-            <p className="font-serif-clean italic text-sm text-[#8A9A83] font-medium leading-relaxed">
+          <div className="mt-4 pt-3.5 border-t border-[#8A9A83]/25 max-w-xs mx-auto">
+            <p className="font-serif-clean italic text-base sm:text-lg text-[#6E8168] font-medium leading-relaxed">
               &ldquo;Todo lo hizo hermoso en su tiempo.&rdquo;
             </p>
-            <span className="text-[11px] font-sans-clean uppercase tracking-[0.2em] text-[#C6A67A] font-bold block mt-0.5">
+            <span className="text-xs sm:text-sm font-sans-clean uppercase tracking-[0.2em] text-[#C6A67A] font-bold block mt-1">
               Eclesiastés 3:11
             </span>
           </div>
@@ -249,7 +249,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-[10px] font-sans-clean uppercase tracking-[0.3em] text-[#8A9A83] font-bold">
+          <span className="text-xs font-sans-clean uppercase tracking-[0.3em] text-[#8A9A83] font-bold">
             MI BABY SHOWER
           </span>
           <h2 className="font-script text-6xl sm:text-7xl text-[#555A4F] my-1 drop-shadow-xs">
@@ -273,11 +273,11 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
                 alt="Ecografía de Benjamín"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute top-1.5 right-1.5 px-2 py-0.5 rounded-full bg-black/60 text-[8px] font-sans-clean font-bold text-white shadow-2xs">
+              <div className="absolute top-1.5 right-1.5 px-2 py-0.5 rounded-full bg-black/70 text-[10px] font-sans-clean font-bold text-white shadow-2xs">
                 ECO 4D
               </div>
             </div>
-            <p className="font-handwriting text-xs text-[#8A9A83] font-bold text-center mt-2">
+            <p className="font-handwriting text-sm text-[#8A9A83] font-bold text-center mt-2">
               ¡Hola a todos!
             </p>
           </motion.div>
@@ -296,11 +296,11 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
                 alt="Benjamín dormidito en su mantita"
                 className="w-full h-full object-contain"
               />
-              <div className="absolute top-1.5 right-1.5 px-2 py-0.5 rounded-full bg-[#EBF3EC] text-[8px] font-sans-clean font-bold text-[#6E8168] shadow-2xs">
+              <div className="absolute top-1.5 right-1.5 px-2.5 py-0.5 rounded-full bg-[#EBF3EC] text-[10px] font-sans-clean font-bold text-[#6E8168] shadow-2xs">
                 Dulces Sueños
               </div>
             </div>
-            <p className="font-handwriting text-xs text-stone-600 font-bold text-center mt-2">
+            <p className="font-handwriting text-sm text-stone-700 font-bold text-center mt-2">
               Soñando contigo
             </p>
           </motion.div>
@@ -318,20 +318,20 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-[10px] font-sans-clean uppercase tracking-[0.25em] text-[#8A9A83] font-bold block mb-1">
+          <span className="text-xs font-sans-clean uppercase tracking-[0.25em] text-[#8A9A83] font-bold block mb-1">
             Nuestra Familia
           </span>
           <h2 className="font-sans-clean font-bold text-xl sm:text-2xl text-[#4A4A4A] uppercase tracking-wider mb-2">
             Mis papis: <span className="text-[#8A9A83] font-script normal-case text-3xl sm:text-4xl font-normal block sm:inline">{config.parentsNames}</span>
           </h2>
-          <p className="text-xs text-[#555A4F] font-sans-clean max-w-xs mx-auto mb-7 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#555A4F] font-sans-clean max-w-xs mx-auto mb-7 leading-relaxed">
             Esperando con todo el corazón la bendición de tenerte muy pronto entre nuestros brazos.
           </p>
         </motion.div>
 
         {/* 2 Polaroids Superimposed and Asymmetrically Rotated (Sin Emojis) */}
         <div className="relative w-full max-w-xs mx-auto h-64 flex items-center justify-center">
-          {/* Polaroid 1 (Left, rotated -4deg): Alejandra y Andrés */}
+          {/* Polaroid 1 (Left, rotated -4deg): Alejandra y Andrés (Nueva foto) */}
           <motion.div
             initial={{ opacity: 0, x: -30, rotate: -8 }}
             whileInView={{ opacity: 1, x: 0, rotate: -4 }}
@@ -342,11 +342,11 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
             <div className="aspect-square w-full overflow-hidden bg-stone-100 rounded-2xs">
               <img
                 src={config.parentPhoto1Url}
-                alt="Alejandra y Andrés"
-                className="w-full h-full object-cover"
+                alt="Andrés y Alejandra"
+                className="w-full h-full object-cover object-[center_20%]"
               />
             </div>
-            <p className="font-handwriting text-xs text-stone-600 text-center mt-2 font-semibold">
+            <p className="font-handwriting text-sm text-stone-700 text-center mt-2 font-bold">
               Juntos en la dulce espera
             </p>
           </motion.div>
@@ -366,7 +366,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
                 className="w-full h-full object-cover"
               />
             </div>
-            <p className="font-handwriting text-xs text-stone-600 text-center mt-2 font-semibold">
+            <p className="font-handwriting text-sm text-stone-700 text-center mt-2 font-bold">
               Contando los días
             </p>
           </motion.div>
@@ -410,40 +410,40 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           className="grid grid-cols-3 gap-2.5 max-w-xs mx-auto mb-6"
         >
           {/* Card Día */}
-          <div className="p-3 rounded-2xl bg-white border border-[#C6A67A]/40 shadow-sm flex flex-col items-center">
-            <span className="text-[9px] font-sans-clean uppercase tracking-wider text-[#8A9A83] font-bold">
+          <div className="p-3.5 rounded-2xl bg-white border border-[#C6A67A]/40 shadow-sm flex flex-col items-center">
+            <span className="text-xs font-sans-clean uppercase tracking-wider text-[#8A9A83] font-bold">
               DÍA
             </span>
-            <span className="font-serif-clean text-2xl sm:text-3xl font-bold text-[#4A4A4A] my-0.5">
+            <span className="font-serif-clean text-3xl sm:text-4xl font-bold text-[#4A4A4A] my-0.5">
               {config.dayNumber}
             </span>
-            <span className="text-[10px] font-sans-clean text-stone-500 font-medium capitalize">
+            <span className="text-xs sm:text-sm font-sans-clean text-stone-600 font-semibold capitalize">
               {config.dayName}
             </span>
           </div>
 
           {/* Card Mes */}
-          <div className="p-3 rounded-2xl bg-white border border-[#C6A67A]/40 shadow-sm flex flex-col items-center">
-            <span className="text-[9px] font-sans-clean uppercase tracking-wider text-[#8A9A83] font-bold">
+          <div className="p-3.5 rounded-2xl bg-white border border-[#C6A67A]/40 shadow-sm flex flex-col items-center">
+            <span className="text-xs font-sans-clean uppercase tracking-wider text-[#8A9A83] font-bold">
               MES
             </span>
-            <span className="font-serif-clean text-2xl sm:text-3xl font-bold text-[#4A4A4A] my-0.5">
+            <span className="font-serif-clean text-3xl sm:text-4xl font-bold text-[#4A4A4A] my-0.5">
               {config.monthNumber}
             </span>
-            <span className="text-[10px] font-sans-clean text-stone-500 font-medium capitalize">
+            <span className="text-xs sm:text-sm font-sans-clean text-stone-600 font-semibold capitalize">
               {config.monthName}
             </span>
           </div>
 
           {/* Card Año */}
-          <div className="p-3 rounded-2xl bg-white border border-[#C6A67A]/40 shadow-sm flex flex-col items-center">
-            <span className="text-[9px] font-sans-clean uppercase tracking-wider text-[#8A9A83] font-bold">
+          <div className="p-3.5 rounded-2xl bg-white border border-[#C6A67A]/40 shadow-sm flex flex-col items-center">
+            <span className="text-xs font-sans-clean uppercase tracking-wider text-[#8A9A83] font-bold">
               AÑO
             </span>
-            <span className="font-serif-clean text-2xl sm:text-3xl font-bold text-[#4A4A4A] my-0.5">
+            <span className="font-serif-clean text-3xl sm:text-4xl font-bold text-[#4A4A4A] my-0.5">
               {config.yearShort}
             </span>
-            <span className="text-[10px] font-sans-clean text-stone-500 font-medium">
+            <span className="text-xs sm:text-sm font-sans-clean text-stone-600 font-semibold">
               2026
             </span>
           </div>
@@ -460,14 +460,14 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           <div className="absolute top-2 right-3 text-xl opacity-20 pointer-events-none">🌿</div>
           <div className="absolute bottom-2 left-3 text-xl opacity-20 pointer-events-none">🌿</div>
 
-          <h3 className="text-xs font-sans-clean uppercase tracking-[0.25em] font-bold text-[#F9F6F0] mb-4">
+          <h3 className="text-sm font-sans-clean uppercase tracking-[0.25em] font-bold text-[#F9F6F0] mb-4">
             ¿CUÁNTO FALTA?
           </h3>
 
           {timeLeft.isPast ? (
             <div className="py-2">
-              <p className="font-script text-3xl text-white">¡Hoy es el gran día!</p>
-              <p className="text-xs text-white/90 mt-1">Estamos celebrando la llegada de {config.babyName}</p>
+              <p className="font-script text-3xl sm:text-4xl text-white">¡Hoy es el gran día!</p>
+              <p className="text-sm text-white/90 mt-1">Estamos celebrando la llegada de {config.babyName}</p>
             </div>
           ) : (
             <div className="flex items-center justify-center gap-2 sm:gap-3 text-center">
@@ -482,7 +482,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
                     <span className="font-serif-clean text-2xl sm:text-3xl font-bold text-white tabular-nums tracking-tight">
                       {String(item.val).padStart(2, '0')}
                     </span>
-                    <span className="text-[9px] font-sans-clean uppercase tracking-wider text-[#F9F6F0]/85 mt-0.5">
+                    <span className="text-xs font-sans-clean uppercase tracking-wider text-[#F9F6F0] mt-0.5 font-bold">
                       {item.label}
                     </span>
                   </div>
@@ -501,19 +501,17 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
             href={googleCalendarUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs font-sans-clean font-semibold text-[#6E8168] hover:text-[#555A4F] bg-white/80 border border-[#8A9A83]/30 px-4 py-2 rounded-full shadow-2xs hover:bg-white transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 text-sm font-sans-clean font-semibold text-[#5A6D54] hover:text-[#4A4A4A] bg-white/90 border border-[#8A9A83]/40 px-5 py-2.5 rounded-full shadow-xs hover:bg-white transition-all cursor-pointer"
           >
-            <Calendar className="w-3.5 h-3.5 text-[#8A9A83]" />
+            <Calendar className="w-4 h-4 text-[#8A9A83]" />
             <span>Agregar a mi Calendario de Google</span>
           </a>
         </div>
       </section>
 
       {/* =========================================================================
-          SECCIÓN 5 - UBICACIÓN
-          Contenedor con forma de arco / bóveda en color arena,
-          "Lugar", "Salón San Juan Suba", "Calle 151b # 103f-41", "2:00 PM a 7:00 PM"
-          Botón rectangular verde salvia: "Ver Ubicación en Google Maps"
+          SECCIÓN 5 - UBICACIÓN (PRÓXIMAMENTE)
+          Actualizado a "Próximamente" por cambio de lugar solicitado
       ========================================================================== */}
       <section className="py-8 px-6 text-center">
         <motion.div
@@ -524,52 +522,52 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           className="max-w-xs mx-auto p-8 rounded-t-[100px] rounded-b-3xl bg-[#D4B895]/35 border border-[#C6A67A]/50 shadow-md relative overflow-hidden"
         >
           {/* Location Pin Icon */}
-          <div className="w-12 h-12 rounded-full bg-white text-[#8A9A83] mx-auto flex items-center justify-center shadow-xs mb-2">
-            <MapPin className="w-6 h-6" />
+          <div className="w-14 h-14 rounded-full bg-white text-[#8A9A83] mx-auto flex items-center justify-center shadow-xs mb-2.5">
+            <MapPin className="w-7 h-7 text-[#8A9A83]" />
           </div>
 
           {/* Script Title: "Lugar" */}
-          <h3 className="font-script text-4xl text-[#555A4F] mb-1">
+          <h3 className="font-script text-4xl sm:text-5xl text-[#555A4F] mb-1">
             Lugar
           </h3>
 
-          {/* Venue texts */}
-          <div className="space-y-1 my-3">
-            <p className="font-sans-clean font-bold text-base text-[#4A4A4A]">
-              {config.venueName}
+          {/* Estado Próximamente destacado */}
+          <div className="my-3 space-y-2">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-white/95 border border-[#C6A67A]/60 text-sm font-sans-clean font-bold text-[#8c6738] uppercase tracking-wider shadow-2xs">
+              Próximamente
+            </span>
+
+            <p className="font-sans-clean font-bold text-base sm:text-lg text-[#4A4A4A] leading-snug">
+              Ubicación por confirmar
             </p>
-            <p className="text-xs text-[#555A4F] font-sans-clean">
-              {config.venueAddress}
+            <p className="text-xs sm:text-sm text-[#555A4F] font-sans-clean max-w-xs mx-auto leading-relaxed">
+              Estamos ultimando los detalles del salón en Bogotá. Te lo compartiremos muy pronto con la ubicación exacta por WhatsApp.
             </p>
-            <p className="text-xs text-stone-500 font-sans-clean">
-              Suba, Bogotá
-            </p>
-            <p className="text-xs font-semibold text-[#8A9A83] font-sans-clean pt-1.5">
-              Hora: {config.timeString}
-            </p>
+            <div className="pt-2 border-t border-[#8A9A83]/20 space-y-1">
+              <p className="text-xs sm:text-sm font-bold text-[#6E8168] font-sans-clean">
+                Fecha: {config.dayName}, {config.dayNumber} de {config.monthName} de 2026
+              </p>
+              <p className="text-xs sm:text-sm font-semibold text-[#8A9A83] font-sans-clean">
+                Horario: {config.timeString}
+              </p>
+            </div>
           </div>
 
-          {/* Rectangular Interactive Sage Green Button */}
-          <div className="mt-5">
-            <a
-              href={config.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-6 rounded-xl bg-[#8A9A83] hover:bg-[#788871] text-white font-sans-clean font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
-            >
-              <MapPin className="w-4 h-4" />
-              <span>Ver Ubicación</span>
-              <ExternalLink className="w-3.5 h-3.5 opacity-80" />
-            </a>
+          {/* Tarjeta informativa de estado */}
+          <div className="mt-4">
+            <div className="w-full py-3 px-4 rounded-xl bg-white/90 border border-[#8A9A83]/40 text-[#555A4F] font-sans-clean font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-2xs">
+              <Sparkles className="w-4 h-4 text-[#C6A67A] shrink-0" />
+              <span>Te avisaremos la dirección exacta</span>
+            </div>
           </div>
         </motion.div>
       </section>
 
       {/* =========================================================================
           SECCIÓN 6 - CONFIRMACIÓN (RSVP)
-          Opciones múltiples: WhatsApp Principal (Alejandra: 314 389 9735),
-          WhatsApp Alternativo (Andrés: 316 336 6206),
-          Llamada o SMS directo, y Formulario de confirmación interactivo.
+          WhatsApp Principal (Alejandra: 314 389 9735),
+          Contacto directo con Andrés (Llamada / SMS: 316 336 6206)
+          y Formulario de confirmación personalizado.
       ========================================================================== */}
       <section className="py-8 px-6 text-center">
         <motion.div
@@ -577,77 +575,76 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-xs mx-auto p-6 rounded-3xl bg-white border border-[#8A9A83]/30 shadow-md"
+          className="max-w-xs mx-auto p-6 sm:p-7 rounded-3xl bg-white border border-[#8A9A83]/30 shadow-md"
         >
-          <div className="w-12 h-12 rounded-full bg-[#EBF3EC] text-[#25D366] mx-auto flex items-center justify-center shadow-xs mb-2">
-            <MessageCircle className="w-6 h-6 fill-[#25D366]/20" />
+          <div className="w-14 h-14 rounded-full bg-[#EBF3EC] text-[#25D366] mx-auto flex items-center justify-center shadow-xs mb-2.5">
+            <MessageCircle className="w-7 h-7 fill-[#25D366]/20" />
           </div>
 
-          <h3 className="font-script text-4xl text-[#555A4F] mb-1">
+          <h3 className="font-script text-4xl sm:text-5xl text-[#555A4F] mb-1">
             Confirmación
           </h3>
 
-          <p className="text-xs text-[#555A4F] font-sans-clean leading-relaxed my-3">
-            {config.rsvpInstruction || 'Confirma tu asistencia por WhatsApp a este número, indicando tu nombre completo y si asistirás o no. Así podremos llevar nuestro registro. ¡Te esperamos con mucho amor!'}
+          <p className="text-xs sm:text-sm text-[#555A4F] font-sans-clean leading-relaxed my-3">
+            {config.rsvpInstruction || 'Confirma tu asistencia comunicándote con Andrés y Alejandra indicando tu nombre completo y si asistirás. ¡Te esperamos con mucho amor!'}
           </p>
 
-          {/* Number Display Tag */}
-          <div className="mb-4 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F5F1E7] border border-[#8A9A83]/30 text-xs font-sans-clean font-bold text-[#555A4F]">
-            <span>Línea:</span>
-            <span className="text-[#6E8168] tracking-wider font-mono">
-              +57 {displayPhonePrimary}
-            </span>
-          </div>
+          <div className="space-y-3">
+            {/* 1. Tarjeta de Contacto Directo para Andrés (Llamada / SMS) */}
+            <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#8A9A83]/30 text-left shadow-2xs">
+              <span className="text-xs font-sans-clean uppercase tracking-wider font-bold text-[#8c6738] block mb-1">
+                Línea de Andrés:
+              </span>
+              <p className="text-xs sm:text-sm font-mono font-bold text-stone-700 mb-2">
+                +57 {displayPhoneSecondary}
+              </p>
+              
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  href={`tel:+${phoneSecondary}`}
+                  className="py-2.5 px-2.5 rounded-xl bg-white hover:bg-stone-50 text-[#555A4F] border border-stone-200 font-sans-clean font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#8A9A83]" />
+                  <span>Llamar</span>
+                </a>
 
-          <div className="space-y-2.5">
-            {/* Botón Principal: WhatsApp Alejandra */}
-            <a
-              href={getWaLink(phonePrimary)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-sans-clean font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer text-center"
-            >
-              <MessageCircle className="w-4 h-4 fill-white shrink-0" />
-              <span>Confirmar por WhatsApp</span>
-            </a>
+                <a
+                  href={getSmsLink(phoneSecondary)}
+                  className="py-2.5 px-2.5 rounded-xl bg-white hover:bg-stone-50 text-[#555A4F] border border-stone-200 font-sans-clean font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
+                >
+                  <Send className="w-3.5 h-3.5 text-[#8A9A83]" />
+                  <span>Enviar SMS</span>
+                </a>
+              </div>
+            </div>
 
-            {/* Botón Alternativo si WhatsApp marca invitar: WhatsApp Andrés / Alternativo */}
-            <a
-              href={getWaLink(phoneSecondary)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-2.5 px-3 rounded-xl bg-[#EBF3EC] hover:bg-[#dcead8] text-[#555A4F] border border-[#8A9A83]/40 font-sans-clean font-semibold text-[11px] transition-all active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer text-center"
-            >
-              <MessageCircle className="w-3.5 h-3.5 text-[#25D366] fill-[#25D366]/20 shrink-0" />
-              <span>WhatsApp Alternativo ({displayPhoneSecondary})</span>
-            </a>
-
-            {/* Opciones directas: Llamada / SMS */}
-            <div className="grid grid-cols-2 gap-2 pt-1">
-              <a
-                href={getSmsLink(phonePrimary)}
-                className="py-2.5 px-2 rounded-xl bg-stone-50 hover:bg-stone-100 text-[#555A4F] border border-stone-200 font-sans-clean font-semibold text-[11px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-              >
-                <Send className="w-3 h-3 text-[#8A9A83]" />
-                <span>Enviar SMS</span>
-              </a>
+            {/* 2. Canal WhatsApp con Alejandra */}
+            <div className="p-3.5 rounded-2xl bg-[#EBF3EC]/60 border border-[#25D366]/30 text-left shadow-2xs">
+              <span className="text-xs font-sans-clean uppercase tracking-wider font-bold text-[#20ba5a] block mb-1">
+                WhatsApp Alejandra:
+              </span>
+              <p className="text-xs sm:text-sm font-mono font-bold text-stone-700 mb-2">
+                +57 {displayPhonePrimary}
+              </p>
 
               <a
-                href={`tel:+${phonePrimary}`}
-                className="py-2.5 px-2 rounded-xl bg-stone-50 hover:bg-stone-100 text-[#555A4F] border border-stone-200 font-sans-clean font-semibold text-[11px] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                href={getWaLink(phonePrimary)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-sans-clean font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer text-center"
               >
-                <Phone className="w-3 h-3 text-[#8A9A83]" />
-                <span>Llamar</span>
+                <MessageCircle className="w-4 h-4 fill-white shrink-0" />
+                <span>Confirmar por WhatsApp</span>
               </a>
             </div>
 
             {/* Botón Personalizar y Enviar en Formulario */}
             <button
               onClick={() => setIsRsvpModalOpen(true)}
-              className="w-full mt-1 py-2.5 px-3 rounded-xl bg-[#FAF4ED] hover:bg-[#F2E8DC] text-[#8c6738] border border-[#C6A67A]/50 font-sans-clean font-bold text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              className="w-full py-3 px-3.5 rounded-xl bg-[#FAF4ED] hover:bg-[#F2E8DC] text-[#8c6738] border border-[#C6A67A]/60 font-sans-clean font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-2xs"
             >
-              <UserCheck className="w-3.5 h-3.5 text-[#C6A67A]" />
-              <span>Personalizar Confirmación</span>
+              <UserCheck className="w-4 h-4 text-[#C6A67A]" />
+              <span>Personalizar Mensaje de Asistencia</span>
             </button>
           </div>
         </motion.div>
@@ -816,40 +813,48 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
               </div>
 
               {/* Action Buttons */}
-              <div className="space-y-2 pt-2 border-t border-stone-200">
+              <div className="space-y-2.5 pt-3 border-t border-stone-200">
+                <div className="grid grid-cols-2 gap-2">
+                  <a
+                    href={`tel:+${phoneSecondary}`}
+                    className="py-2.5 px-2 rounded-xl bg-[#FAF4ED] hover:bg-[#f2e7db] text-[#8c6738] text-xs font-sans-clean font-bold flex items-center justify-center gap-1.5 cursor-pointer border border-[#C6A67A]/40 shadow-2xs"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-[#C6A67A]" />
+                    <span>Llamar a Andrés</span>
+                  </a>
+
+                  <a
+                    href={getSmsLink(phoneSecondary)}
+                    className="py-2.5 px-2 rounded-xl bg-[#FAF4ED] hover:bg-[#f2e7db] text-[#8c6738] text-xs font-sans-clean font-bold flex items-center justify-center gap-1.5 cursor-pointer border border-[#C6A67A]/40 shadow-2xs"
+                  >
+                    <Send className="w-3.5 h-3.5 text-[#C6A67A]" />
+                    <span>SMS a Andrés</span>
+                  </a>
+                </div>
+
                 <a
                   href={getWaLink(phonePrimary)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs font-sans-clean font-bold flex items-center justify-center gap-2 cursor-pointer shadow-xs"
+                  className="w-full py-3 px-3.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs sm:text-sm font-sans-clean font-bold flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-98 transition-all"
                 >
                   <MessageCircle className="w-4 h-4 fill-white shrink-0" />
                   <span>Enviar por WhatsApp a Alejandra</span>
                 </a>
 
-                <a
-                  href={getWaLink(phoneSecondary)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2 px-3 rounded-xl bg-[#EBF3EC] hover:bg-[#dcead8] text-[#555A4F] text-xs font-sans-clean font-semibold flex items-center justify-center gap-2 cursor-pointer border border-[#8A9A83]/30"
-                >
-                  <MessageCircle className="w-3.5 h-3.5 text-[#25D366] fill-[#25D366]/20 shrink-0" />
-                  <span>Enviar por WhatsApp a Andrés</span>
-                </a>
-
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-2 pt-0.5">
                   <a
                     href={getSmsLink(phonePrimary)}
-                    className="py-2 px-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-[11px] font-sans-clean font-semibold flex items-center justify-center gap-1 cursor-pointer"
+                    className="py-2 px-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-sans-clean font-semibold flex items-center justify-center gap-1 cursor-pointer"
                   >
                     <Send className="w-3 h-3 text-[#8A9A83]" />
-                    <span>Enviar SMS</span>
+                    <span>SMS a Alejandra</span>
                   </a>
 
                   <button
                     type="button"
                     onClick={() => handleCopyMessage(generateRsvpText())}
-                    className="py-2 px-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-[11px] font-sans-clean font-semibold flex items-center justify-center gap-1 cursor-pointer"
+                    className="py-2 px-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-sans-clean font-semibold flex items-center justify-center gap-1 cursor-pointer"
                   >
                     <Copy className="w-3 h-3 text-[#8A9A83]" />
                     <span>{isCopied ? '¡Copiado!' : 'Copiar Texto'}</span>

@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import confetti from 'canvas-confetti';
 import { Sparkles, Ticket } from 'lucide-react';
 import { RealisticWaxSeal, BohoCloud } from './BohoIcons';
+import { audioPlayer } from '../utils/audioPlayer';
 
 interface EnvelopeCoverProps {
   onOpen: () => void;
@@ -11,6 +12,8 @@ interface EnvelopeCoverProps {
 
 export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, babyName }) => {
   const handleOpenClick = () => {
+    // Synchronously unlock audio on mobile gesture
+    audioPlayer.unlockMobileAudio();
     try {
       confetti({
         particleCount: 65,
@@ -51,13 +54,13 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, babyName }
       <div className="relative w-full max-w-sm mx-auto flex flex-col items-center">
         {/* Top Header in Spanish */}
         <div className="mb-4 text-center">
-          <span className="text-[10px] font-sans-clean uppercase tracking-[0.3em] text-[#8A9A83] font-bold block mb-0.5">
+          <span className="text-xs font-sans-clean uppercase tracking-[0.3em] text-[#8A9A83] font-bold block mb-1">
             Invitación Especial
           </span>
           <h2 className="font-script text-4xl sm:text-5xl text-[#555A4F] drop-shadow-xs">
             Baby Shower
           </h2>
-          <p className="font-serif-clean italic text-sm text-[#8A9A83] -mt-1 font-medium">
+          <p className="font-serif-clean italic text-base text-[#8A9A83] -mt-1 font-semibold">
             de {babyName}
           </p>
         </div>
@@ -88,21 +91,21 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, babyName }
                 alt={`Ecografía de ${babyName}`}
                 className="w-full h-full object-cover"
               />
-              <span className="absolute top-1 left-1.5 px-1 py-0.2 rounded bg-black/60 text-[6.5px] font-mono text-white/90">
+              <span className="absolute top-1 left-1.5 px-1 py-0.2 rounded bg-black/60 text-[8px] font-mono text-white/90">
                 ECO 4D
               </span>
             </div>
-            <p className="text-[10px] font-script text-center text-[#555A4F] mt-1.5 font-bold tracking-wide">
+            <p className="text-xs font-script text-center text-[#555A4F] mt-1.5 font-bold tracking-wide">
               {babyName}
             </p>
           </div>
 
           {/* Floating ticket: "Pase Personal" */}
           <div 
-            className="absolute -bottom-4 -right-3 px-3 py-1 bg-[#F9F6F0] border border-[#C6A67A] shadow-md rounded-lg rotate-[7deg] z-20 flex items-center gap-1.5 pointer-events-none"
+            className="absolute -bottom-4 -right-3 px-3.5 py-1.5 bg-[#F9F6F0] border border-[#C6A67A] shadow-md rounded-lg rotate-[7deg] z-20 flex items-center gap-1.5 pointer-events-none"
           >
-            <Ticket className="w-3.5 h-3.5 text-[#C6A67A]" />
-            <span className="text-[9px] font-sans-clean font-bold uppercase tracking-wider text-[#555A4F]">
+            <Ticket className="w-4 h-4 text-[#C6A67A]" />
+            <span className="text-xs font-sans-clean font-bold uppercase tracking-wider text-[#555A4F]">
               Pase Personal
             </span>
           </div>
@@ -112,7 +115,7 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, babyName }
             <RealisticWaxSeal onClick={handleOpenClick} />
 
             {/* Guest Tag */}
-            <div className="mt-3 px-4 py-1 rounded-full bg-[#F9F6F0]/95 border border-[#8A9A83]/40 text-[10px] font-sans-clean tracking-wider text-[#555A4F] shadow-xs font-medium">
+            <div className="mt-3.5 px-4 py-1.5 rounded-full bg-[#F9F6F0]/95 border border-[#8A9A83]/40 text-xs font-sans-clean tracking-wider text-[#555A4F] shadow-xs font-semibold">
               Con cariño para ti y tu familia
             </div>
           </div>
@@ -122,9 +125,9 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, babyName }
         <div className="mt-7 text-center">
           <button
             onClick={handleOpenClick}
-            className="group inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#8A9A83] hover:bg-[#788871] text-white text-xs font-sans-clean font-bold uppercase tracking-[0.2em] shadow-lg hover:shadow-xl transition-all cursor-pointer active:scale-95"
+            className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#8A9A83] hover:bg-[#788871] text-white text-xs sm:text-sm font-sans-clean font-bold uppercase tracking-[0.2em] shadow-lg hover:shadow-xl transition-all cursor-pointer active:scale-95"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#F9E8B8]" />
+            <Sparkles className="w-4 h-4 text-[#F9E8B8]" />
             <span>TOCAR PARA ABRIR INVITACIÓN</span>
           </button>
         </div>

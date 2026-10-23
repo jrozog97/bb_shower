@@ -22,7 +22,7 @@ const chapters: ItineraryChapter[] = [
     activityNote: 'PRIMER ENCUENTRO · ABRAZOS DE BIENVENIDA',
     imageUrl: '/src/assets/images/itinerary_bienvenida_1792609839135.jpg',
     imageAlt: 'Benjamín saludando feliz con globitos tiernos en su bienvenida',
-    storyText: '¡Siento que ya llegaron! Abro mis ojitos con mucha alegría mientras mis papitos Alejandra y Andrés los reciben con una sonrisa gigante, música suave y deliciosas bebidas de bienvenida.',
+    storyText: '¡Siento que ya llegaron! Abro mis ojitos con mucha alegría mientras mis papitos Andrés y Alejandra los reciben con una sonrisa gigante, música suave y deliciosas bebidas de bienvenida.',
   },
   {
     id: 2,
@@ -158,19 +158,19 @@ export const StoryUltrasoundItinerary: React.FC = () => {
           </AnimatePresence>
 
           {/* Time Badge Overlay */}
-          <div className="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-xs border border-[#C6A67A]/40 text-[10px] font-sans-clean font-bold text-[#555A4F] flex items-center gap-1.5 shadow-sm">
-            <Clock className="w-3 h-3 text-[#8A9A83]" />
+          <div className="absolute top-2.5 left-2.5 z-10 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-xs border border-[#C6A67A]/40 text-xs font-sans-clean font-bold text-[#555A4F] flex items-center gap-1.5 shadow-sm">
+            <Clock className="w-3.5 h-3.5 text-[#8A9A83]" />
             <span>{current.time}</span>
           </div>
 
           {/* Category Badge Overlay */}
-          <div className="absolute top-2.5 right-2.5 z-10 px-2.5 py-1 rounded-full bg-[#8A9A83] text-white text-[9.5px] font-sans-clean font-bold shadow-xs">
+          <div className="absolute top-2.5 right-2.5 z-10 px-3 py-1.5 rounded-full bg-[#8A9A83] text-white text-xs font-sans-clean font-bold shadow-xs">
             {current.badgeLabel}
           </div>
         </div>
 
         {/* Story Narration Content Box (Benjamín's Words) */}
-        <div className="mt-3.5 min-h-[115px]">
+        <div className="mt-4 min-h-[120px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={current.id}
@@ -178,22 +178,22 @@ export const StoryUltrasoundItinerary: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3 }}
-              className="space-y-1.5"
+              className="space-y-2"
             >
               <div className="flex items-center justify-between">
-                <span className="text-[9.5px] font-sans-clean uppercase tracking-wider text-[#8c6738] font-bold">
+                <span className="text-xs font-sans-clean uppercase tracking-wider text-[#8c6738] font-bold">
                   {current.activityNote}
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-[#EBF3EC] text-[9px] text-[#6E8168] font-sans-clean font-semibold">
+                <span className="px-2.5 py-0.5 rounded-full bg-[#EBF3EC] text-xs text-[#6E8168] font-sans-clean font-semibold">
                   {current.time}
                 </span>
               </div>
 
-              <h4 className="font-serif-clean text-lg sm:text-xl text-[#4A4A4A] font-bold tracking-tight">
+              <h4 className="font-serif-clean text-xl sm:text-2xl text-[#4A4A4A] font-bold tracking-tight">
                 {current.chapterTitle}
               </h4>
 
-              <p className="text-xs sm:text-[13px] text-[#555A4F] font-sans-clean leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-[#555A4F] font-sans-clean leading-relaxed font-normal">
                 &ldquo;{current.storyText}&rdquo;
               </p>
             </motion.div>

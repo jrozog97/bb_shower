@@ -13,9 +13,9 @@ export default function App() {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
 
   const handleOpenEnvelope = () => {
-    setIsEnvelopeOpen(true);
-    // Start gentle music on user interaction
+    // Start gentle music synchronously on user interaction (critical for mobile iOS/Android)
     audioPlayer.play(config.musicUrl);
+    setIsEnvelopeOpen(true);
   };
 
   return (

@@ -2,7 +2,7 @@ import { InvitationConfig } from '../types/invitation';
 
 export const defaultInvitationConfig: InvitationConfig = {
   babyName: 'Benjamín',
-  parentsNames: 'Alejandra y Andrés',
+  parentsNames: 'Andrés y Alejandra',
   welcomeCurvedText: '¡Un hermoso bebé está a punto de llegar!',
   mainBearTitle: 'Una nueva historia está por comenzar, y nos hace felices saber que hay personas como tú con quienes compartirla.',
   subtitle: '“Todo lo hizo hermoso en su tiempo.” Eclesiastés 3:11',
@@ -15,19 +15,20 @@ export const defaultInvitationConfig: InvitationConfig = {
   fullDateTarget: '2026-11-29T14:00:00',
   timeString: '2:00 PM a 7:00 PM',
 
-  venueName: 'Salón San Juan Suba',
-  venueAddress: 'Calle 151b # 103f-41',
-  googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Calle+151b+%23+103f-41+Suba+Bogota',
+  venueName: 'Próximamente',
+  venueAddress: 'Ubicación por confirmar (Bogotá)',
+  googleMapsUrl: '',
 
   hostPhone: '573143899735',
   hostPhoneSecondary: '573163366206',
-  rsvpInstruction: 'Confirma tu asistencia por WhatsApp a este número, indicando tu nombre completo y si asistirás o no. Así podremos llevar nuestro registro. ¡Te esperamos con mucho amor!',
-  rsvpMessage: '¡Hola Alejandra y Andrés! Confirmo mi asistencia al Baby Shower de Benjamín 🧸✨\n\nNombre completo: \n¿Asistiré?: ',
+  rsvpInstruction: 'Confirma tu asistencia por WhatsApp a Andrés y Alejandra indicando tu nombre completo y si asistirás. ¡Te esperamos con mucho amor!',
+  rsvpMessage: '¡Hola Andrés y Alejandra! Confirmo mi asistencia al Baby Shower de Benjamín 🧸✨\n\nNombre completo: \n¿Asistiré?: ',
 
-  giftNote: 'Te compartimos nuestra lista de regalos para nuestro bebé. En el enlace encontrarás los regalitos que elegimos con mucho amor; solo debes escoger uno y comprarlo en un punto físico de Pepe Ganga.',
+  giftNote: 'Te compartimos nuestra lista de regalos para nuestro bebé. En ella encontrarás los regalitos que elegimos con mucho amor; solo debes escoger uno y adquirirlo en cualquier punto físico o tienda online de Pepe Ganga.',
   giftListUrl: 'https://www.pepeganga.com/bebes',
   closureTitle: 'Te Esperamos',
   closureText: 'Con mucho amor',
+  musicUrl: '/assets/lullaby.mp3',
 
   // Curated personal photography provided by the user
   parentPhoto1Url: '/assets/parents-alejandra-andres.png',

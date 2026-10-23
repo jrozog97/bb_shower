@@ -13,7 +13,7 @@ export interface GiftRegistryItem {
 
 export const PEPE_GANGA_REGISTRY_INFO = {
   numeroLista: '11349',
-  titular: 'ALEJANDRA VELANDIA ROMERO',
+  titular: 'ANDRÉS Y ALEJANDRA',
   bebe: 'BENJAMIN',
   almacenOrigen: '13',
   motivo: 'BABY SHOWER',
