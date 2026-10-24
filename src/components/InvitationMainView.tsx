@@ -7,9 +7,7 @@ import {
   MessageCircle, 
   Calendar,
   Heart,
-  Sparkles,
-  Phone,
-  Send
+  Sparkles
 } from 'lucide-react';
 import { InvitationConfig } from '../types/invitation';
 import { audioPlayer } from '../utils/audioPlayer';
@@ -84,11 +82,6 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
   const getWaLink = (phone: string) => {
     const text = config.rsvpMessage || defaultRsvpMessage;
     return `https://api.whatsapp.com/send/?phone=${phone}&text=${encodeURIComponent(text)}`;
-  };
-
-  const getSmsLink = (phone: string) => {
-    const text = config.rsvpMessage || defaultRsvpMessage;
-    return `sms:+${phone}?body=${encodeURIComponent(text)}`;
   };
 
   // Google Calendar URL generator
@@ -558,36 +551,28 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           </p>
 
           <div className="space-y-3">
-            {/* 1. Tarjeta de Contacto Directo para Andrés (Llamada / SMS) */}
-            <div className="p-3.5 rounded-2xl bg-[#F9F7F2] border border-[#8A9A83]/30 text-left shadow-2xs">
-              <span className="text-xs font-sans-clean uppercase tracking-wider font-bold text-[#8c6738] block mb-1">
-                Línea de Andrés:
+            {/* 1. Canal WhatsApp con Andrés */}
+            <div className="p-3.5 rounded-2xl bg-[#EBF3EC]/70 border border-[#25D366]/30 text-left shadow-2xs">
+              <span className="text-xs font-sans-clean uppercase tracking-wider font-bold text-[#20ba5a] block mb-1">
+                WhatsApp Andrés:
               </span>
               <p className="text-xs sm:text-sm font-mono font-bold text-stone-700 mb-2">
                 +57 {displayPhoneSecondary}
               </p>
-              
-              <div className="grid grid-cols-2 gap-2">
-                <a
-                  href={`tel:+${phoneSecondary}`}
-                  className="py-2.5 px-2.5 rounded-xl bg-white hover:bg-stone-50 text-[#555A4F] border border-stone-200 font-sans-clean font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
-                >
-                  <Phone className="w-3.5 h-3.5 text-[#8A9A83]" />
-                  <span>Llamar</span>
-                </a>
 
-                <a
-                  href={getSmsLink(phoneSecondary)}
-                  className="py-2.5 px-2.5 rounded-xl bg-white hover:bg-stone-50 text-[#555A4F] border border-stone-200 font-sans-clean font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
-                >
-                  <Send className="w-3.5 h-3.5 text-[#8A9A83]" />
-                  <span>Enviar SMS</span>
-                </a>
-              </div>
+              <a
+                href={getWaLink(phoneSecondary)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-sans-clean font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer text-center"
+              >
+                <MessageCircle className="w-4 h-4 fill-white shrink-0" />
+                <span>Confirmar con Andrés</span>
+              </a>
             </div>
 
             {/* 2. Canal WhatsApp con Alejandra */}
-            <div className="p-3.5 rounded-2xl bg-[#EBF3EC]/60 border border-[#25D366]/30 text-left shadow-2xs">
+            <div className="p-3.5 rounded-2xl bg-[#EBF3EC]/70 border border-[#25D366]/30 text-left shadow-2xs">
               <span className="text-xs font-sans-clean uppercase tracking-wider font-bold text-[#20ba5a] block mb-1">
                 WhatsApp Alejandra:
               </span>
@@ -602,7 +587,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
                 className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-white font-sans-clean font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer text-center"
               >
                 <MessageCircle className="w-4 h-4 fill-white shrink-0" />
-                <span>Confirmar por WhatsApp</span>
+                <span>Confirmar con Alejandra</span>
               </a>
             </div>
           </div>
