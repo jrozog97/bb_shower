@@ -122,13 +122,16 @@ export const EnvelopeCover: React.FC<EnvelopeCoverProps> = ({ onOpen, babyName }
         </div>
 
         {/* Action instruction button in Spanish */}
-        <div className="mt-7 text-center">
+        <div className="mt-6 text-center max-w-xs sm:max-w-sm mx-auto px-2">
           <button
             onClick={handleOpenClick}
-            className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#8A9A83] hover:bg-[#788871] text-white text-xs sm:text-sm font-sans-clean font-bold uppercase tracking-[0.2em] shadow-lg hover:shadow-xl transition-all cursor-pointer active:scale-95"
+            className="group w-full py-4 px-5 rounded-2xl bg-[#8A9A83] hover:bg-[#788871] text-white shadow-lg hover:shadow-xl transition-all cursor-pointer active:scale-95 flex items-center justify-center gap-2 border border-[#72826c]"
           >
-            <Sparkles className="w-4 h-4 text-[#F9E8B8]" />
-            <span>TOCAR PARA ABRIR INVITACIÓN</span>
+            <Sparkles className="w-4 h-4 text-[#F9E8B8] shrink-0" />
+            <span className="font-sans-clean font-bold text-xs sm:text-sm text-center leading-snug">
+              Acompáñanos con pañales y pañitos para esta nueva aventura.
+            </span>
+            <Sparkles className="w-4 h-4 text-[#F9E8B8] shrink-0" />
           </button>
         </div>
       </div>
