@@ -1,6 +1,0 @@
-{
-  "name": "Invitación Digital Baby Shower - Estilo Sus Ideas",
-  "description": "Invitación web interactiva para Baby Shower con sobre virtual, cuenta regresiva, confirmación WhatsApp/RSVP, mapa, itinerario, mesa de regalos y libro de recuerdos.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
