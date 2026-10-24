@@ -20,7 +20,7 @@ export const defaultInvitationConfig: InvitationConfig = {
   googleMapsUrl: '',
 
   hostPhone: '573143899735',
-  hostPhoneSecondary: '573163366206',
+  hostPhoneSecondary: '573166336206',
   rsvpInstruction: 'Confirma tu asistencia por WhatsApp a Andrés y Alejandra indicando tu nombre completo y si asistirás. ¡Te esperamos con mucho amor!',
   rsvpMessage: '¡Hola Andrés y Alejandra! Confirmo mi asistencia al Baby Shower de Benjamín 🧸✨\n\nNombre completo: \n¿Asistiré?: ',
 

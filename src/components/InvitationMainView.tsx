@@ -72,10 +72,10 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
 
   // RSVP phone handling
   const phonePrimary = (config.hostPhone || '573143899735').replace(/\D/g, '');
-  const phoneSecondary = (config.hostPhoneSecondary || '573163366206').replace(/\D/g, '');
+  const phoneSecondary = (config.hostPhoneSecondary || '573166336206').replace(/\D/g, '');
   
   const displayPhonePrimary = '314 389 9735';
-  const displayPhoneSecondary = '316 336 6206';
+  const displayPhoneSecondary = '316 633 6206';
 
   const defaultRsvpMessage = '¡Hola Andrés y Alejandra! Confirmo mi asistencia al Baby Shower de Benjamín 🧸✨\n\nNombre completo: \n¿Asistiré?: ';
 
