@@ -7,17 +7,17 @@ export const defaultInvitationConfig: InvitationConfig = {
   mainBearTitle: 'Una nueva historia está por comenzar, y nos hace felices saber que hay personas como tú con quienes compartirla.',
   subtitle: '“Todo lo hizo hermoso en su tiempo.” Eclesiastés 3:11',
   
-  dayNumber: '29',
-  dayName: 'Domingo',
+  dayNumber: '28',
+  dayName: 'Sábado',
   monthNumber: '11',
   monthName: 'Noviembre',
   yearShort: '26',
-  fullDateTarget: '2026-11-29T14:00:00',
+  fullDateTarget: '2026-11-28T14:00:00',
   timeString: '2:00 PM a 7:00 PM',
 
-  venueName: 'Próximamente',
-  venueAddress: 'Ubicación por confirmar (Bogotá)',
-  googleMapsUrl: '',
+  venueName: 'Conjunto Residencial La Montaña',
+  venueAddress: 'Salón Comunal · Carrera 72c # 22d-27',
+  googleMapsUrl: 'https://maps.google.com/?q=Carrera+72c+%23+22d-27,+Conjunto+Residencial+La+Monta%C3%B1a,+Bogot%C3%A1',
 
   hostPhone: '573143899735',
   hostPhoneSecondary: '573166336206',

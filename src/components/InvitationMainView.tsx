@@ -7,7 +7,8 @@ import {
   MessageCircle, 
   Calendar,
   Heart,
-  Sparkles
+  Sparkles,
+  Navigation
 } from 'lucide-react';
 import { InvitationConfig } from '../types/invitation';
 import { audioPlayer } from '../utils/audioPlayer';
@@ -90,12 +91,12 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
     const details = encodeURIComponent(
       `¡Acompáñanos a celebrar el Baby Shower de ${config.babyName}!\n\n` +
       `Padres: ${config.parentsNames}\n` +
-      `Lugar: Próximamente (Ubicación por confirmar en Bogotá)\n` +
+      `Lugar: ${config.venueName} - ${config.venueAddress}\n` +
       `Horario: ${config.timeString}\n` +
       `¡Te esperamos con mucho amor!`
     );
-    const location = encodeURIComponent(`Próximamente, Bogotá, Colombia`);
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261129T190000Z/20261130T000000Z&details=${details}&location=${location}&sf=true&output=xml`;
+    const location = encodeURIComponent(`${config.venueName}, Carrera 72c # 22d-27, Bogotá, Colombia`);
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261128T190000Z/20261129T000000Z&details=${details}&location=${location}&sf=true&output=xml`;
   };
 
   return (
@@ -475,8 +476,9 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
       </section>
 
       {/* =========================================================================
-          SECCIÓN 5 - UBICACIÓN (PRÓXIMAMENTE)
-          Actualizado a "Próximamente" por cambio de lugar solicitado
+          SECCIÓN 5 - UBICACIÓN DE CELEBRACIÓN
+          Conjunto Residencial La Montaña - Salón Comunal
+          Carrera 72c # 22d-27 (Bogotá)
       ========================================================================== */}
       <section className="py-8 px-6 text-center">
         <motion.div
@@ -484,28 +486,33 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="max-w-xs mx-auto p-8 rounded-t-[100px] rounded-b-3xl bg-[#D4B895]/35 border border-[#C6A67A]/50 shadow-md relative overflow-hidden"
+          className="max-w-xs mx-auto p-7 sm:p-8 rounded-t-[100px] rounded-b-3xl bg-[#D4B895]/35 border border-[#C6A67A]/50 shadow-md relative overflow-hidden"
         >
           {/* Location Pin Icon */}
           <div className="w-14 h-14 rounded-full bg-white text-[#8A9A83] mx-auto flex items-center justify-center shadow-xs mb-2.5">
             <MapPin className="w-7 h-7 text-[#8A9A83]" />
           </div>
 
-          {/* Script Title: "Lugar" */}
+          {/* Script Title: "Ubicación" */}
           <h3 className="font-script text-4xl sm:text-5xl text-[#555A4F] mb-1">
-            Lugar
+            Ubicación
           </h3>
 
-          {/* Estado Próximamente destacado */}
           <div className="my-3 space-y-2">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-white/95 border border-[#C6A67A]/60 text-sm font-sans-clean font-bold text-[#8c6738] uppercase tracking-wider shadow-2xs">
-              Próximamente
-            </span>
-
-            <p className="font-sans-clean font-bold text-base sm:text-lg text-[#4A4A4A] leading-snug">
-              Ubicación por confirmar
+            <p className="font-sans-clean font-bold text-lg text-[#4A4A4A] leading-snug">
+              {config.venueName}
             </p>
-            <div className="pt-2 border-t border-[#8A9A83]/20 space-y-1">
+            <span className="inline-block px-3.5 py-1 rounded-full bg-white/95 border border-[#8A9A83]/40 text-xs font-sans-clean font-bold text-[#555A4F] uppercase tracking-wider shadow-2xs">
+              Salón Comunal
+            </span>
+            <p className="font-sans-clean text-sm font-bold text-[#555A4F] pt-1">
+              Carrera 72c # 22d-27
+            </p>
+            <p className="text-xs font-sans-clean text-stone-600 font-semibold">
+              Bogotá, Colombia
+            </p>
+
+            <div className="pt-3 border-t border-[#8A9A83]/20 space-y-1">
               <p className="text-xs sm:text-sm font-bold text-[#6E8168] font-sans-clean">
                 Fecha: {config.dayName}, {config.dayNumber} de {config.monthName} de 2026
               </p>
@@ -515,13 +522,20 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
             </div>
           </div>
 
-          {/* Tarjeta informativa de estado */}
-          <div className="mt-4">
-            <div className="w-full py-3 px-4 rounded-xl bg-white/90 border border-[#8A9A83]/40 text-[#555A4F] font-sans-clean font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-2xs">
-              <Sparkles className="w-4 h-4 text-[#C6A67A] shrink-0" />
-              <span>Te avisaremos la dirección exacta</span>
+          {/* Botón de Google Maps */}
+          {config.googleMapsUrl && (
+            <div className="mt-4">
+              <a
+                href={config.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 px-4 rounded-xl bg-[#8A9A83] hover:bg-[#788871] text-white font-sans-clean font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer text-center"
+              >
+                <Navigation className="w-4 h-4 text-[#F9E8B8] shrink-0" />
+                <span>Abrir en Google Maps</span>
+              </a>
             </div>
-          </div>
+          )}
         </motion.div>
       </section>
 
