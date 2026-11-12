@@ -16,7 +16,7 @@ export const defaultInvitationConfig: InvitationConfig = {
   timeString: '2:00 PM a 7:00 PM',
 
   venueName: 'Conjunto Residencial La Montaña',
-  venueAddress: 'Salón Comunal · Carrera 72c # 22d-27',
+  venueAddress: 'Carrera 72c # 22d-27, Salón Comunal',
   googleMapsUrl: 'https://maps.google.com/?q=Carrera+72c+%23+22d-27,+Conjunto+Residencial+La+Monta%C3%B1a,+Bogot%C3%A1',
 
   hostPhone: '573143899735',

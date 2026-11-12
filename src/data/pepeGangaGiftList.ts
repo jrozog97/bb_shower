@@ -18,7 +18,7 @@ export const PEPE_GANGA_REGISTRY_INFO = {
   almacenOrigen: '13',
   motivo: 'BABY SHOWER',
   telefono: '3143899735',
-  direccionSalon: 'SALON SAN JUAN PLAZA IMPERIAL / SUBA',
+  direccionSalon: 'CONJUNTO RESIDENCIAL LA MONTAÑA - SALÓN COMUNAL (CARRERA 72C # 22D-27)',
   notas: 'RECLAMAR TICKET DE CAMBIO',
   pdfUrl: '/assets/lista-regalos-11349.pdf',
   pepeGangaUrl: 'https://www.pepeganga.com/bebes',

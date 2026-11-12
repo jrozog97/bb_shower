@@ -486,37 +486,45 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="max-w-xs mx-auto p-7 sm:p-8 rounded-t-[100px] rounded-b-3xl bg-[#D4B895]/35 border border-[#C6A67A]/50 shadow-md relative overflow-hidden"
+          className="max-w-xs mx-auto p-7 sm:p-8 rounded-t-[100px] rounded-b-3xl bg-[#F6EFE6] border-2 border-[#C6A67A]/60 shadow-lg relative overflow-hidden"
         >
           {/* Location Pin Icon */}
-          <div className="w-14 h-14 rounded-full bg-white text-[#8A9A83] mx-auto flex items-center justify-center shadow-xs mb-2.5">
+          <div className="w-14 h-14 rounded-full bg-white text-[#8A9A83] mx-auto flex items-center justify-center shadow-sm mb-3">
             <MapPin className="w-7 h-7 text-[#8A9A83]" />
           </div>
 
           {/* Script Title: "Ubicación" */}
-          <h3 className="font-script text-4xl sm:text-5xl text-[#555A4F] mb-1">
+          <h3 className="font-script text-4xl sm:text-5xl text-[#3A4238] mb-2">
             Ubicación
           </h3>
 
-          <div className="my-3 space-y-2">
-            <p className="font-sans-clean font-bold text-lg text-[#4A4A4A] leading-snug">
-              {config.venueName}
-            </p>
-            <span className="inline-block px-3.5 py-1 rounded-full bg-white/95 border border-[#8A9A83]/40 text-xs font-sans-clean font-bold text-[#555A4F] uppercase tracking-wider shadow-2xs">
+          <div className="my-3 space-y-2.5">
+            <h4 className="font-sans-clean font-bold text-lg text-[#2C332E] leading-snug">
+              {config.venueName || 'Conjunto Residencial La Montaña'}
+            </h4>
+
+            <span className="inline-block px-4 py-1 rounded-full bg-white border border-[#8A9A83]/50 text-xs font-sans-clean font-bold text-[#4A5D45] uppercase tracking-wider shadow-2xs">
               Salón Comunal
             </span>
-            <p className="font-sans-clean text-sm font-bold text-[#555A4F] pt-1">
-              Carrera 72c # 22d-27
-            </p>
-            <p className="text-xs font-sans-clean text-stone-600 font-semibold">
-              Bogotá, Colombia
-            </p>
 
-            <div className="pt-3 border-t border-[#8A9A83]/20 space-y-1">
-              <p className="text-xs sm:text-sm font-bold text-[#6E8168] font-sans-clean">
+            {/* Address box for maximum visibility */}
+            <div className="bg-white p-3.5 rounded-2xl border border-[#C6A67A]/50 shadow-xs my-2">
+              <span className="text-[10px] font-sans-clean uppercase tracking-widest text-[#8A9A83] font-bold block mb-0.5">
+                Dirección del Evento
+              </span>
+              <p className="font-sans-clean text-base font-extrabold text-[#2C332E]">
+                Carrera 72c # 22d-27
+              </p>
+              <p className="text-xs font-sans-clean text-stone-600 font-semibold mt-0.5">
+                Bogotá, Colombia
+              </p>
+            </div>
+
+            <div className="pt-2 border-t border-[#8A9A83]/20 space-y-1">
+              <p className="text-xs sm:text-sm font-bold text-[#4A5D45] font-sans-clean">
                 Fecha: {config.dayName}, {config.dayNumber} de {config.monthName} de 2026
               </p>
-              <p className="text-xs sm:text-sm font-semibold text-[#8A9A83] font-sans-clean">
+              <p className="text-xs sm:text-sm font-semibold text-[#6E8168] font-sans-clean">
                 Horario: {config.timeString}
               </p>
             </div>
@@ -529,7 +537,7 @@ export const InvitationMainView: React.FC<InvitationMainViewProps> = ({ config }
                 href={config.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3 px-4 rounded-xl bg-[#8A9A83] hover:bg-[#788871] text-white font-sans-clean font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer text-center"
+                className="w-full py-3.5 px-4 rounded-xl bg-[#8A9A83] hover:bg-[#788871] text-white font-sans-clean font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer text-center"
               >
                 <Navigation className="w-4 h-4 text-[#F9E8B8] shrink-0" />
                 <span>Abrir en Google Maps</span>
